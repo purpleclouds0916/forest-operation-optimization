@@ -2,13 +2,13 @@
   width: inherit;
   height: 70vh;
   // overflow: visible;
-  // margin-left: -48px;
-  margin-right: 24px;
+  margin-left: 48px;
+
 }
 
 text {
   z-index: 100;
-  font-size: 8px;
+  font-size: 16px;
 }
 
 svg + g {
@@ -33,6 +33,11 @@ svg + g {
 .axis--y {
   font-size: 18px;
   font-weight: 400;
+}
+
+.axis--y {
+  margin-right: 54px;
+  position:absolute;
 }
 
 .lineChartText {
@@ -69,3 +74,5 @@ svg + g {
   fill: #f2b705;
   stroke: #f29f05;
 }
+
+

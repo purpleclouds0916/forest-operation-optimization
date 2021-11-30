@@ -64,7 +64,7 @@ const LineChart: VFC<Props> = (props) => {
   }
 
   useEffect(() => {
-    const margin = { top: 20, right: 0, bottom: 70, left: 80 };
+    const margin = { top: 20, right: 50, bottom: 70, left: 95 };
     const width =
       parseInt(d3.select('#d3demo').style('width'), 10) -
       margin.left -
@@ -128,7 +128,7 @@ const LineChart: VFC<Props> = (props) => {
       .domain([0, max])
       .range([height, 0]);
 
-    const xAxis = d3.axisBottom(x).ticks(30);
+    const xAxis = d3.axisBottom(x);
     const yAxis = d3.axisLeft(y);
 
     const line = d3
@@ -358,7 +358,7 @@ const LineChart: VFC<Props> = (props) => {
     svg
       .append('text')
       .attr('class', 'axis--x')
-      .attr('y', height + 40)
+      .attr('y', height + 50)
       .attr('x', width / 2)
       .attr('text-anchor', 'middle')
       .text('胸腔直径[cm]');
@@ -367,7 +367,7 @@ const LineChart: VFC<Props> = (props) => {
       .append('text')
       .attr('class', 'axis--y')
       .attr('y', height / 2)
-      .attr('x', -50)
+      .attr('x', -75)
       .attr('text-anchor', 'middle')
       .attr('writing-mode', 'tb')
       .text('金額【円】');
