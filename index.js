@@ -21,7 +21,7 @@ app.post("/api/world", (req, res) => {
   //必要なもの: node-java (npm install java)
   //          XMLHttpRequest
   const java = require("java");
-  const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+  // const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
   //カレントディレクトリ
   console.log("Current dir = " + process.cwd());
 
