@@ -6,6 +6,7 @@
   "author": "Shiun Murata <purpleclouds0916@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "cuOptimThinning.dll": "link:./cuOptimThinning.dll",
     "express": "^4.17.1",
     "java": "^0.12.2"
   },
