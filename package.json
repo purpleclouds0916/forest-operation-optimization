@@ -8,6 +8,7 @@
   "dependencies": {
     "cuOptimThinning.dll": "link:./cuOptimThinning.dll",
     "express": "^4.17.1",
+    "install": "^0.13.0",
     "java": "^0.12.2"
   },
   "scripts": {

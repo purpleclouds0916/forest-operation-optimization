@@ -48,9 +48,10 @@ app.post("/api/world", (req, res) => {
   let result = javaObject.runSync(JSON.stringify(req.body));
   console.log(result);
 
-  res.send(
-    `I received your POST request. This is what you sent me: ${result}`
-  );
+  // res.send(
+  //   `I received your POST request. This is what you sent me: ${result}`
+  // );
+  res.json({result})
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

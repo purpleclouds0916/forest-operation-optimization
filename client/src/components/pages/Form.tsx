@@ -12,6 +12,10 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 import schema from '../../validation/MainValidation';
 
 import 'katex/dist/katex.min.css';
@@ -180,7 +184,12 @@ const Form = () => {
 
   const [response, setResponse] = useState<any>('');
   // const [post, setPost] = useState<any>('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [responseToPost, setResponseToPost] = useState<any>('');
+
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const callApi = async () => {
     const Testresponse = await fetch('/api/hello');
@@ -196,8 +205,9 @@ const Form = () => {
       .catch((err) => console.log(err));
   });
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = (data: FormValues) => {
     // e.preventDefault();
+    setLoading(true);
 
     const DataSdmdH: number[] = [];
     data.SDMD.H.map((value) => {
@@ -331,15 +341,32 @@ const Form = () => {
     console.log(JSON.stringify(Json));
     // console.log(JSON.stringify(data));
 
-    const Test1response: any = await fetch('/api/world', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(Json),
-    });
-    const body = await Test1response.text();
-    setResponseToPost(body);
+    void axios
+      .post('/api/world', Json)
+      .then((res) => {
+        console.log(res.data.result);
+        setResponseToPost(res.data.result);
+        navigate('/submit')
+      })
+      .catch(() => {
+        alert(
+          '計算に失敗しました。お手数ですが、管理者に問い合わせをしてください。',
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    // const Test1response: any = await fetch('/api/world', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(Json),
+    // });
+    // const body = await Test1response.text();
+    // console.log(body)
+    // setResponseToPost(body);
   };
 
   return (
@@ -384,6 +411,13 @@ const Form = () => {
           clearErrors={clearErrors}
         />
         <input type="submit" />
+        {loading && (
+          <>
+            <div className="isCalculation">
+              <p>計算中です</p>
+            </div>
+          </>
+        )}
       </form>
     </div>
   );

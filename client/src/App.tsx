@@ -4,13 +4,19 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable react/state-in-constructor */
 import { VFC } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 
 // import Test from './components/pages/Test';
 import Form from './components/pages/Form';
+import Result from './components/pages/Result';
 
 const App: VFC = () => (
   <div className="App">
-    <Form />
+    <Routes>
+      <Route path="/" element={<Form />} />
+      <Route path="/submit" element={<Result />} />
+    </Routes>
   </div>
 );
 
