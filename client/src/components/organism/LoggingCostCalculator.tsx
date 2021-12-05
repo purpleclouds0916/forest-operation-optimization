@@ -25,7 +25,7 @@ import TextField from '@mui/material/TextField';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import LineChart from './LineChart';
+import LineChart from './MoveLineChart';
 
 // eslint-disable-next-line import/no-cycle
 import { FormValues } from '../../models/Form';
