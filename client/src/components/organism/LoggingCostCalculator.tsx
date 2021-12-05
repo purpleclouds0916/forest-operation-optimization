@@ -28,7 +28,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import LineChart from './LineChart';
 
 // eslint-disable-next-line import/no-cycle
-import { FormValues } from '../pages/Form';
+import { FormValues } from '../../models/Form';
 
 type Props = {
   register: UseFormRegister<FormValues>;

@@ -20,7 +20,7 @@ import {
 import TextField from '@material-ui/core/TextField';
 import TeX from '@matejmazur/react-katex';
 import { MenuItem } from '@material-ui/core';
-import { FormValues } from '../pages/Form';
+import { FormValues } from '../../models/Form';
 import StandDensityManagementData from '../../data/StandDensityManagementData.json';
 
 type Props = {

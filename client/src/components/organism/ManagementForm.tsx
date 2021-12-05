@@ -22,7 +22,7 @@ import TextField from '@mui/material/TextField';
 import './Management.css';
 
 // eslint-disable-next-line import/no-cycle
-import { FormValues } from '../pages/Form';
+import { FormValues } from '../../models/Form';
 
 type Props = {
   register: UseFormRegister<FormValues>;

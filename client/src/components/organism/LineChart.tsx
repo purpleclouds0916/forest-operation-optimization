@@ -15,7 +15,7 @@ import {
   UseFormWatch,
 } from 'react-hook-form';
 import * as d3 from 'd3';
-import { FormValues } from '../pages/Form';
+import { FormValues } from '../../models/Form';
 
 import './LineChart.css';
 
