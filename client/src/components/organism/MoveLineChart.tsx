@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable no-inner-declarations */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable no-plusplus */
@@ -21,16 +23,26 @@ import './LineChart.css';
 
 // eslint-disable-next-line
 type Props = {
-  description: string;
-  title: string;
-  loggingMethod: string;
-  register: UseFormRegister<FormValues>;
-  handleSubmit: UseFormHandleSubmit<FormValues>;
+  description?: string;
+  title?: string;
+  loggingMethod?: string;
+  register?: UseFormRegister<FormValues>;
+  handleSubmit?: UseFormHandleSubmit<FormValues>;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  control: Control<FormValues, object>;
-  setValue: UseFormSetValue<FormValues>;
-  watch: UseFormWatch<FormValues>;
-  clearErrors: any;
+  control?: Control<FormValues, object>;
+  setValue?: UseFormSetValue<FormValues>;
+  watch?: UseFormWatch<FormValues>;
+  clearErrors?: any;
+  xaxisTitle: string;
+  xaxisUnit: string;
+  yaxisTitle: string;
+  yaxisUnit: string;
+  xaxisMax?: number;
+  yaxisMin?: number;
+  xaxisMin?: number;
+  yaxisMax?: number;
+  isdrag?: boolean;
+  data: Array<Array<number>>;
 };
 const LineChart: VFC<Props> = (props) => {
   // eslint-disable-next-line
@@ -44,24 +56,19 @@ const LineChart: VFC<Props> = (props) => {
     setValue,
     watch,
     clearErrors,
+    xaxisTitle,
+    xaxisUnit,
+    yaxisTitle,
+    yaxisUnit,
+    xaxisMax,
+    yaxisMax,
+    xaxisMin,
+    yaxisMin,
+    data,
+    isdrag,
   } = props;
 
   const d3Chart = useRef();
-  // eslint-disable-next-line
-  // @ts-ignore
-  const watchCostCalculation: any = watch(`${loggingMethod}`);
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  // console.log(watchSdmd);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const points: Array<Array<number>> = [];
-  for (let index = 0; index < 11; index++) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const Xelement = Number(watchCostCalculation.Diameter[index].value);
-    const Yelement = Number(watchCostCalculation.Price[index].value);
-    points[index] = [Xelement, Yelement];
-  }
 
   useEffect(() => {
     const margin = { top: 20, right: 50, bottom: 70, left: 95 };
@@ -73,25 +80,6 @@ const LineChart: VFC<Props> = (props) => {
       parseInt(d3.select('#d3demo').style('height'), 10) -
       margin.top -
       margin.bottom;
-
-    // const points: Array<Array<number>>= []
-
-    // eslint-disable-next-line
-
-    // console.log(array)
-    // const points: Array<Array<number>> = [
-    //   [5, 2000],
-    //   [6, 3000],
-    //   [15, 3000],
-    //   [16, 8000],
-    //   [18, 8000],
-    //   [20, 9500],
-    //   [22, 9500],
-    //   [24, 11500],
-    //   [28, 11500],
-    //   [30, 12500],
-    //   [40, 12500],
-    // ];
 
     d3
       // eslint-disable-next-line
@@ -109,23 +97,40 @@ const LineChart: VFC<Props> = (props) => {
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')'); // eslint-disable-line
 
+    const maxX =
+      xaxisMax !== undefined
+        ? xaxisMax
+        : d3.max(data, (d: Array<number>) => d[0]); // eslint-disable-line
+    const minX =
+      xaxisMin !== undefined
+        ? xaxisMin
+        : d3.min(data, (d: Array<number>) => d[0]); // eslint-disable-line
+
     // x axis scale
     const x = d3
       .scaleLinear()
-      .domain(
-        // eslint-disable-next-line
-        // @ts-ignore
-        d3.extent(points, (d: Array<number>) => d[0]),
-      )
+      // eslint-disable-next-line
+      // @ts-ignore
+      .domain([minX, maxX])
       .range([0, width]);
 
-    const max = d3.max(points, (d: Array<number>) => d[1]); // eslint-disable-line
+    const maxY =
+      yaxisMax !== undefined
+        ? yaxisMax
+        : d3.max(data, (d: Array<number>) => d[1]); // eslint-disable-line
+    const minY =
+      yaxisMin !== undefined
+        ? yaxisMin
+        : d3.min(data, (d: Array<number>) => d[1]); // eslint-disable-line
 
+    // // eslint-disable-next-line
+    // // @ts-ignore
+    // x.domain(d3.extent(AxisRange, (d: Array<Array<number>>) => d[0]));
     const y = d3
       .scaleLinear()
       // eslint-disable-next-line
       // @ts-ignore
-      .domain([0, max])
+      .domain([minY, maxY])
       .range([height, 0]);
 
     const xAxis = d3.axisBottom(x);
@@ -136,24 +141,11 @@ const LineChart: VFC<Props> = (props) => {
       .x((d) => x(d[0]))
       .y((d) => y(d[1]));
 
-    const AxisRange: Array<Array<number>> = [
-      [0, 0],
-      [40, 20000],
-    ];
-
     const focus = svg.append('g');
-
-    // eslint-disable-next-line
-    // @ts-ignore
-    x.domain(d3.extent(AxisRange, (d: Array<Array<number>>) => d[0]));
-    // eslint-disable-next-line
-    // @ts-ignore
-    y.domain(d3.extent(AxisRange, (d: Array<Array<number>>) => d[1]));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 
     focus
       .append('path')
-      .datum(points)
+      .datum(data)
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
       .attr('stroke-linejoin', 'round')
@@ -168,7 +160,7 @@ const LineChart: VFC<Props> = (props) => {
 
     focus
       .selectAll('circle')
-      .data(points)
+      .data(data)
       .enter()
       .append('circle')
       .attr('r', 5.0)
@@ -183,14 +175,14 @@ const LineChart: VFC<Props> = (props) => {
         const idAsString = e.toElement.id; // eslint-disable-line
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const id = Number(idAsString.replace(/[^0-9]/g, ''));
-        console.log(points);
+        console.log(data);
         console.log(id);
         tooltip.style('visibility', 'visible').html(
           // eslint-disable-next-line
-          '胸腔直径:' +
+          `${xaxisTitle}:` +
             Math.round(d[0] * 10) / 10 + // eslint-disable-line
             'cm' +
-            '<br>金額: ' +
+            `<br>${yaxisTitle}: ` +
             Math.round(d[1] / 100) * 100 + // eslint-disable-line
             '円',
         );
@@ -199,7 +191,7 @@ const LineChart: VFC<Props> = (props) => {
         const idAsString = e.toElement.id; // eslint-disable-line
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const id = Number(idAsString.replace(/[^0-9]/g, ''));
-        console.log(points);
+        console.log(data);
         console.log(id);
 
         tooltip
@@ -212,12 +204,12 @@ const LineChart: VFC<Props> = (props) => {
           .html(
             // eslint-disable-next-line
             // eslint-disable-next-line
-            '胸腔直径:' +
-              points[id][0] + // eslint-disable-line
-              'cm' +
-              '<br>金額: ' +
-              points[id][1] + // eslint-disable-line
-              '円',
+            `${xaxisTitle}:` +
+              data[id][0] + // eslint-disable-line
+              `${xaxisUnit}` +
+              `<br>${yaxisTitle}: ` +
+              data[id][1] + // eslint-disable-line
+              `${yaxisUnit}`,
           );
       })
       //  eslint-disable-next-line
@@ -232,95 +224,95 @@ const LineChart: VFC<Props> = (props) => {
       .call(xAxis);
 
     focus.append('g').attr('class', 'axis axis--y').call(yAxis);
-    //  eslint-disable-next-line
-    const dragstarted = () => {};
 
-    function dragged(e: any, d: any) {
-      //   // eslint-disable-next-line
-      //  console.log(props.title)
-      //   // eslint-disable-next-line
-      //  console.log(props.loggingMethod)
+    if (isdrag) {
+      //  eslint-disable-next-line
+      const dragstarted = () => {};
       // eslint-disable-next-line
       // @ts-ignore
-      focus.select('path').attr('d', line); // eslint-disable-line
+      function dragged(e: any, d: any) {
+        // eslint-disable-next-line
+        // @ts-ignore
+        focus.select('path').attr('d', line); // eslint-disable-line
 
-      // eslint-disable-next-line
-      // @ts-ignore
-      d3.select(this).classed('dragging', true);
-      // eslint-disable-next-line
-      // @ts-ignore
-      const idAsString = this.id; // eslint-disable-line
-      const id = Number(idAsString.replace(/[^0-9]/g, '')); // eslint-disable-line
-      // eslint-disable-next-line
-      d[0] = Math.max(
-        id !== 0 ? points[id - 1][0] : 0,
-        Math.min(
-          x.invert(e.x), // eslint-disable-line
-          id !== points.length - 1 ? points[id + 1][0] : 40,
-        ),
-      );
+        // eslint-disable-next-line
+        // @ts-ignore
+        d3.select(this).classed('dragging', true);
+        // eslint-disable-next-line
+        // @ts-ignore
+        const idAsString = this.id; // eslint-disable-line
+        const id = Number(idAsString.replace(/[^0-9]/g, '')); // eslint-disable-line
+        // eslint-disable-next-line
+        d[0] = Math.max(
+          id !== 0 ? data[id - 1][0] : 0,
+          Math.min(
+            x.invert(e.x), // eslint-disable-line
+            id !== data.length - 1 ? data[id + 1][0] : 40,
+          ),
+        );
 
-      d[1] = Math.max(0, Math.min(y.invert(e.y), 20000)); // eslint-disable-line
+        d[1] = Math.max(0, Math.min(y.invert(e.y), 20000)); // eslint-disable-line
 
-      // eslint-disable-next-line
-      // @ts-ignore
-      d3.select(this).attr('cx', x(d[0])).attr('cy', y(d[1])); // eslint-disable-line
+        // eslint-disable-next-line
+        // @ts-ignore
+        d3.select(this).attr('cx', x(d[0])).attr('cy', y(d[1])); // eslint-disable-line
 
-      tooltip
-        .html(
+        tooltip
+          .html(
+            // eslint-disable-next-line
+            '胸腔直径:' +
+              Math.round(d[0] * 10) / 10 + // eslint-disable-line
+              'cm' +
+              '<br>金額: ' +
+              Math.round(d[1] / 100) * 100 + // eslint-disable-line
+              '円',
+          )
+          .style('visibility', 'visible')
           // eslint-disable-next-line
-          '胸腔直径:' +
-            Math.round(d[0] * 10) / 10 + // eslint-disable-line
-            'cm' +
-            '<br>金額: ' +
-            Math.round(d[1] / 100) * 100 + // eslint-disable-line
-            '円',
-        )
-        .style('visibility', 'visible')
+          // @ts-ignore
+          .style('top', event.pageY - 20 + 'px') // eslint-disable-line
+          // eslint-disable-next-line
+          // @ts-ignore
+          .style('left', event.pageX + 10 + 'px'); // eslint-disable-line
+      }
+      // eslint-disable-next-line
+      // @ts-ignore
+      function dragended(d: any) {
         // eslint-disable-next-line
         // @ts-ignore
-        .style('top', event.pageY - 20 + 'px') // eslint-disable-line
+        d3.select(this).classed('dragging', false);
+
         // eslint-disable-next-line
         // @ts-ignore
-        .style('left', event.pageX + 10 + 'px'); // eslint-disable-line
+        const idAsString = this.id; // eslint-disable-line
+        const number = Number(idAsString.replace(/[^0-9]/g, '')); // eslint-disable-line
+
+        const PriceValue = Math.round(d.subject[1] / 100) * 100; // eslint-disable-line
+        const PriceDiameter = Math.round(d.subject[0] * 10) / 10; // eslint-disable-line
+        // eslint-disable-next-line
+        // @ts-ignore
+        setValue(`${loggingMethod}.Price.${number}.value`, PriceValue);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        clearErrors(`${loggingMethod}.Price.${number}.value`);
+        // eslint-disable-next-line
+        // @ts-ignore
+        setValue(`${loggingMethod}.Diameter.${number}.value`, PriceDiameter);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        clearErrors(`${loggingMethod}.Diameter.${number}.value`);
+
+        tooltip.style('visibility', 'hidden');
+      }
+
+      const drag = d3
+        .drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended);
+
+      // eslint-disable-next-line
+      // @ts-ignore
+      focus.selectAll('circle').call(drag);
     }
-
-    // eslint-disable-next-line
-    function dragended(d: any) {
-      // eslint-disable-next-line
-      // @ts-ignore
-      d3.select(this).classed('dragging', false);
-
-      // eslint-disable-next-line
-      // @ts-ignore
-      const idAsString = this.id; // eslint-disable-line
-      const number = Number(idAsString.replace(/[^0-9]/g, '')); // eslint-disable-line
-
-      const PriceValue = Math.round(d.subject[1] / 100) * 100; // eslint-disable-line
-      const PriceDiameter = Math.round(d.subject[0] * 10) / 10; // eslint-disable-line
-      // eslint-disable-next-line
-      // @ts-ignore
-      setValue(`${loggingMethod}.Price.${number}.value`, PriceValue);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      clearErrors(`${loggingMethod}.Price.${number}.value`);
-      // eslint-disable-next-line
-      // @ts-ignore
-      setValue(`${loggingMethod}.Diameter.${number}.value`, PriceDiameter);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      clearErrors(`${loggingMethod}.Diameter.${number}.value`);
-
-      tooltip.style('visibility', 'hidden');
-    }
-
-    const drag = d3
-      .drag()
-      .on('start', dragstarted)
-      .on('drag', dragged)
-      .on('end', dragended);
-
-    // eslint-disable-next-line
-    // @ts-ignore
-    focus.selectAll('circle').call(drag);
 
     // gridlines in x axis function
     const makeXGridlines = () => d3.axisBottom(x).ticks(5);
@@ -361,7 +353,7 @@ const LineChart: VFC<Props> = (props) => {
       .attr('y', height + 50)
       .attr('x', width / 2)
       .attr('text-anchor', 'middle')
-      .text('胸腔直径[cm]');
+      .text(`${xaxisTitle}【${xaxisUnit}】`);
 
     svg
       .append('text')
@@ -370,8 +362,22 @@ const LineChart: VFC<Props> = (props) => {
       .attr('x', -75)
       .attr('text-anchor', 'middle')
       .attr('writing-mode', 'tb')
-      .text('金額【円】');
-  }, [clearErrors, loggingMethod, points, setValue]);
+      .text(`${yaxisTitle}【${yaxisUnit}】`);
+  }, [
+    clearErrors,
+    loggingMethod,
+    data,
+    setValue,
+    xaxisTitle,
+    xaxisUnit,
+    yaxisTitle,
+    yaxisUnit,
+    yaxisMax,
+    xaxisMax,
+    xaxisMin,
+    yaxisMin,
+    isdrag,
+  ]);
 
   return (
     <div id="d3demo">

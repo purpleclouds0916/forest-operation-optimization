@@ -15,15 +15,15 @@ app.get("/api/hello", (req, res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
-app.post("/api/world", (req, res) => {
-  console.log(req.body);
+app.post("/api/calculation", (req, res) => {
+  // console.log(req.body);
   //参考Web: https://moewe-net.com/nodejs/node-java
   //必要なもの: node-java (npm install java)
   //          XMLHttpRequest
   const java = require("java");
   // const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
   //カレントディレクトリ
-  console.log("Current dir = " + process.cwd());
+  // console.log("Current dir = " + process.cwd());
 
   //Javaの実行ファイルをパスに追加(jarファイルはカレントディレクトリに配置する)
   java.classpath.push("OptimThinningJNI-1.0.jar");
@@ -42,16 +42,16 @@ app.post("/api/world", (req, res) => {
   // xhr.abort();
   // //読み込んだファイルの確認
   // console.log(input);
-  console.log(JSON.stringify(req.body))
+  // console.log(JSON.stringify(req.body))
 
   //Javaに送って実行
-  let result = javaObject.runSync(JSON.stringify(req.body));
-  console.log(result);
+  let SH_S = javaObject.runSync(JSON.stringify(req.body));
+  console.log(SH_S);
 
   // res.send(
-  //   `I received your POST request. This is what you sent me: ${result}`
+  //   `I received your POST request. This is what you sent me: ${SH_S}`
   // );
-  res.json({result})
+  res.json(SH_S)
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

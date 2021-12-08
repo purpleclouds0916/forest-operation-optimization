@@ -4,15 +4,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CalculationResultType } from '../models/CalculationResult';
 
 const initialState: CalculationResultType = {
-  SHS: {
-    optimalSolution: {
+  SH_S: {
+    Optimal_solution: {
       SEV: 2000964.0,
       N: [1589.1, 794.8, 531.5],
       T: [46.8, 51.8, 56.8],
       Y: [100.1, 66.1, 347.4],
-      HarvestingProfit: [500318.2, 429470.5, 2258001.8],
+      Harvesting_profit_no_discount: [500318.2, 429470.5, 2258001.8],
+      Message:
+        'Tag: SH_S,  GPU_ID: 0 (Max number of grids: 112  Number of grids per warp: 32),  Max SEV series: [1.39574e+06, 1.71774e+06, 2.00096e+06, 1.95935e+06, 1.91759e+06, 1.87079e+06],  Time(sec):11.155',
     },
-    standSimulation: {
+    Stand_simulation: {
       T: [
         10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0,
         22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0, 32.0, 33.0,
@@ -59,7 +61,7 @@ const initialState: CalculationResultType = {
         21.4, 21.5, 26.0, 26.0, 26.2, 26.3, 26.5, 26.6, 26.7, 29.3, 29.4, 29.5,
         29.6, 29.8, 29.9, 30.0, 0.0,
       ],
-      ValueOfStandingTrees: [
+      Value_of_standing_trees_no_discount: [
         -116711.1, -148724.6, -183363.3, -220178.2, -258758.1, -298731.5,
         -339768.9, -381580.0, -423910.4, -318133.2, 6512.6, 367322.1, 396298.1,
         424411.2, 452245.6, 479743.8, 506857.7, 533547.2, 600374.2, 683369.4,
@@ -78,10 +80,14 @@ const CalculationResult = createSlice({
   name: 'CalculationResult',
   initialState,
   reducers: {
-    addCalculationResult: (state, action: PayloadAction<CalculationResultType>) => ({
+    addCalculationResult: (
+      state,
+      action: PayloadAction<CalculationResultType>,
+    ) => ({
       ...state,
-
-      SHS: action.payload.SHS,
+      //  フォームで受け取った計算結果を型に入れる必要がある。
+      // eslint-disable-next-line
+      SH_S: action.payload.SH_S,
     }),
   },
 });

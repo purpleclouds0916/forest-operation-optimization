@@ -7,22 +7,23 @@ type NestedPartial<T> = {
 };
 
 export interface result {
-  SHS: {
-    optimalSolution: {
+  SH_S: {
+    Optimal_solution: {
       SEV: number;
       N: number[];
       T: number[];
       Y: number[];
-      HarvestingProfit: number[];
+      Harvesting_profit_no_discount: number[];
+      Message: string;
     };
-    standSimulation: {
+    Stand_simulation: {
       T: number[];
       N_dash: number[];
       H: number[];
       N: number[];
       V: number[];
       D: number[];
-      ValueOfStandingTrees: number[];
+      Value_of_standing_trees_no_discount: number[];
     };
   };
 }

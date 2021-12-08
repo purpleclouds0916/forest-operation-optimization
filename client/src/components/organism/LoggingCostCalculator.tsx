@@ -100,6 +100,23 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
 
   const isNumber = /^[-]?\d*(\.\d+)?$/;
 
+  // eslint-disable-next-line
+  // @ts-ignore
+  const watchCostCalculation: any = watch(`${loggingMethod}`);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  // console.log(watchSdmd);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const data: Array<Array<number>> = [];
+  // eslint-disable-next-line no-plusplus
+  for (let index = 0; index < 11; index++) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const Xelement = Number(watchCostCalculation.Diameter[index].value);
+    const Yelement = Number(watchCostCalculation.Price[index].value);
+    data[index] = [Xelement, Yelement];
+  }
+
   return (
     <div>
       {errors.score && errors.score.type === 'validate' && (
@@ -362,6 +379,16 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
             setValue={setValue}
             watch={watch}
             clearErrors={clearErrors}
+            xaxisTitle="胸高直径"
+            xaxisUnit="cm"
+            yaxisTitle="金額"
+            yaxisUnit="円"
+            xaxisMax={40}
+            yaxisMax={20000}
+            xaxisMin={0}
+            yaxisMin={0}
+            data={data}
+            isdrag
           />
         </div>
       </div>
