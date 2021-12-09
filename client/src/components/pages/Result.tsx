@@ -16,12 +16,17 @@ import {
 import { RootState } from '../../redux/store';
 import LineChart from '../organism/MoveLineChart';
 
+interface Data {
+  x: number;
+  y: number;
+}
+
 const Result: VFC = () => {
   console.log('Resultがレンダリングされました');
   const calculationResult = useSelector((state: RootState) => state);
   console.log(calculationResult.SH_S);
 
-  const data: Array<Array<number>> = [];
+  const data: Data[] = [];
 
   if (
     // eslint-disable-next-line
@@ -34,22 +39,23 @@ const Result: VFC = () => {
     const treeHeight = calculationResult.SH_S.Stand_simulation.H;
 
     forestAge.map((element, index) => {
-      data.push([forestAge[index], treeHeight[index]]);
+      //   data.push([forestAge[index], treeHeight[index]]);
+      data.push({ x: forestAge[index], y: treeHeight[index] });
     });
   }
 
   console.log(data);
 
-  const maxOfValueArray: number[] = data.reduce((a, b): number[] =>
-    a[0] > b[0] ? a : b,
-  );
-  console.log(Math.ceil(maxOfValueArray[0] / 10) * 10 + 10);
-  const maxOfValueX = Math.ceil(maxOfValueArray[0] / 10) * 10 ;
-  const maxOfValueY = Math.ceil(maxOfValueArray[1] / 10) * 10 ;
+  //   const maxOfValueArray: number[] = data.reduce((a, b): number[] =>
+  //     a[0] > b[0] ? a : b,
+  //   );
+  //   console.log(Math.ceil(maxOfValueArray[0] / 10) * 10 + 10);
+  //   const maxOfValueX = Math.ceil(maxOfValueArray[0] / 10) * 10 ;
+  //   const maxOfValueY = Math.ceil(maxOfValueArray[1] / 10) * 10 ;
 
   return (
     <>
-      <LineChart
+      {/* <LineChart
         description=""
         title=""
         xaxisTitle="林齢"
@@ -59,7 +65,33 @@ const Result: VFC = () => {
         xaxisMax={maxOfValueX}
         yaxisMax={maxOfValueY}
         data={data}
-      />
+      /> */}
+      <VictoryChart theme={VictoryTheme.material}
+              containerComponent={
+                <VictoryVoronoiContainer
+                  labels={({ datum }) => `直径:${Math.round(datum.x)}, 樹高:${Math.round(datum.y)}`}
+                />
+              }
+      >
+          
+        <VictoryLine
+          style={{
+            data: { stroke: '#c43a31' },
+            parent: { border: '1px solid #ccc' },
+          }}
+          data={data}
+        />
+      </VictoryChart>
+      <VictoryChart
+        domainPadding={{ y: 10 }}
+        containerComponent={
+          <VictoryVoronoiContainer
+            labels={({ datum }) => `yuhijokpl@;tfyuighjo;ktyuhjkilo;${Math.round(datum.x)}, ${Math.round(datum.y)}`}
+          />
+        }
+      >
+        <VictoryLine y={(datum) => Math.sin(2 * Math.PI * datum.x)} />
+      </VictoryChart>
     </>
   );
 };
