@@ -288,7 +288,7 @@ const LineChart: VFC<Props> = (props) => {
         const number = Number(idAsString.replace(/[^0-9]/g, '')); // eslint-disable-line
 
         const PriceValue = Math.round(d.subject[1] / 100) * 100; // eslint-disable-line
-        const PriceDiameter = Math.round(d.subject[0] * 10) / 10; // eslint-disable-line
+        const PriceDiameter = Math.round(d.subject[0]); // eslint-disable-line
         // eslint-disable-next-line
         // @ts-ignore
         setValue(`${loggingMethod}.Price.${number}.value`, PriceValue);
