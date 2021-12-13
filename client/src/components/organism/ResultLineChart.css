@@ -1,0 +1,60 @@
+body {
+  font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: steelblue;
+}
+
+.focus text {
+  font-size: 14px;
+}
+
+.tooltip {
+  fill: white;
+  stroke: #000;
+}
+
+.tooltip-date, .tooltip-likes {
+  font-weight: bold;
+}
+
+.tooltip {
+  display: block;
+  opacity: 1;
+  height: 50px;
+  background-color: red;
+  width: inherit;
+}
+
+.chart-items .chart-item .chart-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.chart-items svg {
+  display: block;
+  width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+  text-align: center;
+}

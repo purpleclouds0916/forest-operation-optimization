@@ -1,12 +1,6 @@
 /* eslint-disable camelcase */
 
-type NestedPartial<T> = {
-  [K in keyof T]?: T[K] extends Array<infer R>
-    ? Array<NestedPartial<R>>
-    : NestedPartial<T[K]>;
-};
-
-export interface result {
+export interface CalculationResultType {
   SH_S: {
     Optimal_solution: {
       SEV: number;
@@ -27,5 +21,3 @@ export interface result {
     };
   };
 }
-
-export type CalculationResultType = NestedPartial<result>;

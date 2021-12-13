@@ -1,0 +1,38 @@
+.chart-wrapper {
+  max-width: 1200px;
+  margin: 48px auto 0;
+}
+
+.chart-wrapper .chart-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chart-wrapper .chart-items .chart-item {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.chart-wrapper .chart-items .chart-item .chart-title {
+  margin: 0 auto;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: -48px;
+}
+
+.chart-wrapper .chart-items .chart-item .axis-y {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: #455a64;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 21px;
+}
+
+.VictoryContainer {
+  overflow: visible;
+}
+
+.VictoryContainer svg {
+  overflow: visible;
+}

@@ -2781,6 +2781,13 @@
   resolved "https://registry.npmjs.org/@types/unist/-/unist-2.0.6.tgz"
   integrity sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==
 
+"@types/victory@^35.0.0":
+  version "35.0.0"
+  resolved "https://registry.yarnpkg.com/@types/victory/-/victory-35.0.0.tgz#57d81e24314fcccf9e63807f6933e8a57768741b"
+  integrity sha512-17Ed/5fSNmIj2APAdM95R4IkJObrOGrHs+YTOwxW28hJvG5XH0uVGxdjLjA5yyoCTPEGQ9i0KKVdQMRjtY2EiQ==
+  dependencies:
+    victory "*"
+
 "@types/webpack-sources@*":
   version "2.1.0"
   resolved "https://registry.npmjs.org/@types/webpack-sources/-/webpack-sources-2.1.0.tgz"
@@ -14147,7 +14154,7 @@ victory-zoom-container@^36.2.0:
     prop-types "^15.5.8"
     victory-core "^36.2.0"
 
-victory@^36.2.0:
+victory@*, victory@^36.2.0:
   version "36.2.0"
   resolved "https://registry.yarnpkg.com/victory/-/victory-36.2.0.tgz#cbc2fae7a29ad35420376906e2d014c9af5f4749"
   integrity sha512-Q39Ypw4vmpc0m27nElOAa0Ug4Qs0G0r8dAidUe14br4ddBV0iUGZrQ/nFuIh8ZOZdQTL7uOGFkjrfSD9yfRI9w==
