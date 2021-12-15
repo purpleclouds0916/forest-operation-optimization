@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable no-useless-concat */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -36,10 +37,13 @@ interface Props {
   DigitsOfYaxis: number;
   yaxisTitle: string;
   yaxisUnit: string;
+  tooltipWidth: number;
 }
+// tooltip用div要素追加
+const tooltip = d3.select('body').append('div').attr('class', 'tooltip');
 
 const ResultLineChart: VFC<Props> = (props) => {
-  const { arrayX, arrayY, title, DigitsOfYaxis, yaxisTitle, yaxisUnit } = props;
+  const { arrayX, arrayY, title, DigitsOfYaxis, yaxisTitle, yaxisUnit, tooltipWidth } = props;
   const d3Chart = useRef();
 
   // ランダムな文字列(id)を作成する
@@ -88,8 +92,8 @@ const ResultLineChart: VFC<Props> = (props) => {
 
     const xAxis = d3.axisBottom(x);
     const yAxis = d3.axisLeft(y);
-    // tooltip用div要素追加
-    const tooltip = d3.select('body').append('div').attr('class', 'tooltip');
+    // // resultTooltip用div要素追加
+    // const resultTooltip = d3.select('body').append('div').attr('class', 'resultTooltip');
 
     const line = d3
       .line()
@@ -106,15 +110,6 @@ const ResultLineChart: VFC<Props> = (props) => {
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const focusText = svg
-      .append('g')
-      .append('text')
-      .style('opacity', 0)
-      .attr('text-anchor', 'left')
-      .attr('alignment-baseline', 'middle')
-      ;
-
-    //  軸ラベルの追加
     svg
       .append('text')
       .attr('class', 'axis--x')
@@ -157,11 +152,9 @@ const ResultLineChart: VFC<Props> = (props) => {
 
     focus.append('circle').attr('r', 4.5);
 
-    focus
+    const myTootip = focus
       .append('rect')
-      .attr('class', 'tooltip')
-      .attr('width', 100)
-      .attr('height', 50)
+      .attr('class', 'result-tooltip')
       .attr('x', 10)
       .attr('y', -22)
       .attr('rx', 4)
@@ -169,29 +162,28 @@ const ResultLineChart: VFC<Props> = (props) => {
 
     focus
       .append('text')
-      .attr('class', 'tooltip-date')
+      .attr('class', 'result-tooltip-x')
       .attr('x', 18)
       .attr('y', -2);
 
-    // focus.append('text').attr('x', 18).attr('y', 18).text(':');
+    focus.append('text').attr('x', 18).attr('y', 18).text(`${yaxisTitle}`);
 
     focus
       .append('text')
-      .attr('class', 'tooltip-likes')
-      .attr('x', 60)
+      .attr('class', 'result-tooltip-y')
+      .attr('x', 18)
       .attr('y', 18);
 
-    focus
-      .append('rect')
-      .attr('class', 'tooltip')
-      .attr('width', 100)
-      .attr('height', 50)
-      .attr('x', 10)
-      .attr('y', -22)
-      .attr('rx', 4)
-      .attr('ry', 4);
-
-    focus.append('text').attr('x', 9).attr('y', '.35em');
+    // focus.append('text').attr('x', 9).attr('y', '.35em');
+    // const focusText = svg
+    //   .append('g')
+    //   .append('rect')
+    //   .style('opacity', 0)
+    //   .attr('id', 'test')
+    //   .attr('text-anchor', 'left')
+    //   .attr('alignment-baseline', 'middle')
+    //   .attr("width", "auto")
+    //   .attr("height", "100%")
 
     svg
       .append('rect')
@@ -202,19 +194,20 @@ const ResultLineChart: VFC<Props> = (props) => {
         focus.style('display', 'block');
         focus.style('opacity', 1);
         focus.style('background-color', 'red');
-        focusText.style('opacity', 1);
+        // focusText.style('opacity', 1);
       })
       .on('mouseout', () => {
         focus.style('display', 'none');
         focus.style('opacity', 0);
-        focusText.style('opacity', 0);
+        // focusText.style('opacity', 0);
       })
       .on('mousemove', mousemove);
 
-    function mousemove(e: any) {
+    function mousemove(this: any, e: any) {
       // console.log(d3.pointer(e));
       const bisect = d3.bisector((d: any) => d[0]).left;
       const x0 = x.invert(d3.pointer(e)[0]);
+      console.log('x0', x0);
       const i = bisect(data, x0, 1);
       const d0 = data[i - 1];
       const d1 = data[i];
@@ -224,12 +217,14 @@ const ResultLineChart: VFC<Props> = (props) => {
       if (d1 !== undefined) {
         const d = x0 - d0[0] > d1[0] - x0 ? d1 : d0;
         focus.attr('transform', `translate(${x(d[0])},${y(d[1])})`);
-        focusText
-          .html(`x:${d[0]}  -  ` + `y:${d[1]}`)
-          .attr('x', x(d[0]) + 15)
-          .attr('y', y(d[1]));
-        // focus.select('.tooltip-date').text(d[0]);
-        // focus.select('.tooltip-likes').text(d[1]);
+
+        const XtooltipText = `林齢:${d[0]}年`;
+        const YtooltipText = `${yaxisTitle}:${d[1]}${yaxisUnit}`;
+
+        myTootip.attr('width', tooltipWidth).attr('height', 50);
+        focus.select('.result-tooltip-x').text(XtooltipText);
+        focus.select('.result-tooltip-y').text(YtooltipText);
+
       }
     }
   });

@@ -28,21 +28,13 @@ body {
   font-size: 14px;
 }
 
-.tooltip {
-  fill: white;
-  stroke: #000;
-}
-
-.tooltip-date, .tooltip-likes {
+.result-tooltip-x, .result-tooltip-y {
   font-weight: bold;
 }
 
-.tooltip {
-  display: block;
-  opacity: 1;
-  height: 50px;
-  background-color: red;
-  width: inherit;
+.result-tooltip {
+  fill: white;
+  stroke: #000;
 }
 
 .chart-items .chart-item .chart-title {
@@ -57,4 +49,20 @@ body {
   height: 600px;
   margin: 0 auto;
   text-align: center;
+}
+
+#test {
+  font-size: 32px;
+  padding: 24px;
+  background-color: red;
+  fill: red;
+}
+
+#Test {
+  position: absolute;
+  visibility: hidden;
+  height: auto;
+  width: auto;
+  white-space: nowrap;
+  /* Thanks to Herb Caudill comment */
 }
