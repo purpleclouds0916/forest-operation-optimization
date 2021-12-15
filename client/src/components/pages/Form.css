@@ -61,6 +61,10 @@ ul {
   display: none;
 }
 
+* {
+  font-size: 18px;
+}
+
 .all-form-item {
   width: 1200px;
   max-width: 100%;
@@ -247,4 +251,24 @@ ul {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+.submit-button {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid steelblue;
+  text-align: center;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 3px 6px gray;
+  cursor: pointer;
+  transition: all 0.15s ease 0s;
+  padding: 22px 24px;
+  border-radius: 8px;
+  font-size: 24px;
+  width: 384px;
+  max-width: 100%;
+  background-color: steelblue;
+  color: #fff;
+  margin-bottom: 48px;
 }
