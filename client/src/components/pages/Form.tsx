@@ -355,10 +355,14 @@ const Form = () => {
   };
 
   return (
-    <div>
-      <Headers description="経営に関する数値を入力するだけで、最適な経営方法を提案します" />
-      <p>{response}</p>
-      <p>{JSON.stringify(responseToPost)}</p>
+    <div className="form-wrapper">
+      
+      <div className="formDescription ">
+        <p className="form-title">林業経営のデータを入力してください</p>
+      </div>
+      
+      {/* <p>{response}</p>
+      <p>{JSON.stringify(responseToPost)}</p> */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         onKeyDown={(e) => checkKeyDown(e)}

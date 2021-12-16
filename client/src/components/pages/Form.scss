@@ -69,6 +69,26 @@ ul {
   font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
 }
 
+.formDescription {
+  display: block;
+  max-width: 100%;
+  padding: 32px 48px;
+  font-size: 24px;
+  font-weight: 700;
+  background: #fafafa;
+  font-weight: 700;
+  // width: 1200px;
+  // margin : 0 auto;
+  margin-bottom: 64px;
+
+
+  .form-title {
+      width: 1200px;
+  margin : 0 auto;
+  font-weight: 700;
+  }
+}
+
 .all-form-item {
   width: 1200px;
   max-width: 100%;
