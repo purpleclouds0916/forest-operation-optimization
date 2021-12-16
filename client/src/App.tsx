@@ -7,14 +7,37 @@ import { VFC } from 'react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Navigate, Route, Routes, useLocation } from 'react-router';
 
-// import Test from './components/pages/Test';
+import Home from './components/pages/Home';
 import Form from './components/pages/Form';
 import Result from './components/pages/Result';
+
+const documentDescription =
+  'このアプリケーションの具体的な説明が入ります。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト';
 
 const App: VFC = () => (
   <div className="App">
     <Routes>
-      <Route path="/" element={<Form />} />
+      <Route
+        path="/"
+        element={
+          <Home
+            title="林業の経営シミュレーション"
+            description="経営に必要なデータを入力するだけで、最適な施業方法を提案します"
+            isMainPage
+          />
+        }
+      />
+      <Route
+        path="/document"
+        element={
+          <Home
+            title="このサイトについて"
+            description={documentDescription}
+            isMainPage={false}
+          />
+        }
+      />
+      <Route path="/form" element={<Form />} />
       <Route path="/submit" element={<Result />} />
     </Routes>
   </div>

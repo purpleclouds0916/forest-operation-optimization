@@ -1,0 +1,93 @@
+.home-body {
+  position: relative;
+  width: 100%;
+    .home-background-image {
+        position: absolute;
+        z-index: -1;
+        overflow: hidden;
+        height: 700px;
+        width: 100%;
+        top: -64px;
+        
+        img {
+            width: 100%;
+        }
+
+        &::before {
+            content: "";        
+            width: 100%;        
+            height: 100%;     
+            display: block;    
+            background: linear-gradient(rgba(255,255,255,0) 0, #fff 80%); 
+            position: absolute;  
+            top: 0;
+            left: 0;
+        }
+    }
+
+    .home-wrapper {
+        margin-bottom: 64px;
+        .home-content {
+            text-align: center;
+            display: block;
+            text-align: center;
+            background-color: #fff;
+            width: 810px;
+            max-width: 100%;
+            padding: 32px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            margin: 64px auto;
+        }
+
+        img {
+            margin-bottom: 12px;
+        }
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .description {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .home-buttons {
+            display: flex;
+            
+            a {
+                text-decoration: none;
+                color:  #fff;
+                width: 384px;
+                max-width: 100%;
+            }
+
+            .link-button {
+                font-weight: 700;
+                margin-right: 32px;
+                display: block;
+                border: 2px solid steelblue;
+                text-align: center;
+                text-decoration: none;
+                box-shadow: 0 3px 6px gray;
+                cursor: pointer;
+                transition: all 0.15s ease 0s;
+                padding: 22px 24px;
+                border-radius: 8px;
+                font-size: 24px;
+                background-color: steelblue;
+                margin-bottom: 48px;
+            }
+
+            .try-button {
+                margin-right: 0;
+            }
+
+        }
+    }
+    
+}
+
+
