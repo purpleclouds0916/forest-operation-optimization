@@ -101,42 +101,6 @@ const Result: VFC = () => {
         </div>
       </div>
 
-      {/* <div className="result-list">
-          <p>土地希望価(SEV)</p>
-          <p>{calculationResult.SH_S.Optimal_solution.SEV}</p>
-          <p>植栽密度</p>
-          <ul>
-            {' '}
-            {calculationResult.SH_S.Optimal_solution.N.map((item, i) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-
-          <p>伐採のタイミング</p>
-          <p>
-            {' '}
-            {calculationResult.SH_S.Optimal_solution.T.map((item, i) => (
-              <li>{item}</li>
-            ))}
-          </p>
-          <p>伐採のタイミングと収穫材積</p>
-          <p>
-            {' '}
-            {calculationResult.SH_S.Optimal_solution.Y.map((item, i) => (
-              <li>{item}</li>
-            ))}
-          </p>
-          <p>伐採のタイミングと収益</p>
-          <p>
-            {' '}
-            {calculationResult.SH_S.Optimal_solution.Harvesting_profit_no_discount.map(
-              (item, i) => (
-                <li>{item}</li>
-              ),
-            )}
-          </p>
-        </div> */}
-
       <div className="card result-items result-list-card">
       <div className="form-title">施業方法の詳細</div>
         <div className="chart-wrapper">
