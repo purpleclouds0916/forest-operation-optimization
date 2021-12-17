@@ -138,6 +138,7 @@ const Result: VFC = () => {
         </div> */}
 
       <div className="card result-items result-list-card">
+      <div className="form-title">施業方法の詳細</div>
         <div className="chart-wrapper">
           <div className="chart-items">
             <ResultLineChart
@@ -150,7 +151,7 @@ const Result: VFC = () => {
               tooltipWidth={98}
             />
             <ResultLineChart
-              title="立木密度"
+              title="立木密度の推移"
               arrayX={ageforest}
               arrayY={standDensity}
               DigitsOfYaxis={1000}
@@ -159,7 +160,7 @@ const Result: VFC = () => {
               tooltipWidth={150}
             />
             <ResultLineChart
-              title="林分材積"
+              title="林分材積の推移"
               arrayX={ageforest}
               arrayY={ForestStandTimberArea}
               DigitsOfYaxis={100}
@@ -168,12 +169,12 @@ const Result: VFC = () => {
               tooltipWidth={100}
             />
             <ResultLineChart
-              title="平均胸高直径"
+              title="平均胸高直径の推移"
               arrayX={ageforest}
               arrayY={DBH}
               DigitsOfYaxis={10}
               yaxisTitle="胸高直径"
-              yaxisUnit="m"
+              yaxisUnit="cm"
               tooltipWidth={120}
             />
             <ResultLineChart
