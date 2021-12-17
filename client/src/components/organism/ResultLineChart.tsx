@@ -43,7 +43,15 @@ interface Props {
 const tooltip = d3.select('body').append('div').attr('class', 'tooltip');
 
 const ResultLineChart: VFC<Props> = (props) => {
-  const { arrayX, arrayY, title, DigitsOfYaxis, yaxisTitle, yaxisUnit, tooltipWidth } = props;
+  const {
+    arrayX,
+    arrayY,
+    title,
+    DigitsOfYaxis,
+    yaxisTitle,
+    yaxisUnit,
+    tooltipWidth,
+  } = props;
   const d3Chart = useRef();
 
   // ランダムな文字列(id)を作成する
@@ -71,7 +79,7 @@ const ResultLineChart: VFC<Props> = (props) => {
 
     arrayX.map((element, index) => data.push([arrayX[index], arrayY[index]]));
 
-    const margin = { top: 50, right: 100, bottom: 60, left: 100 };
+    const margin = { top: 65, right: 100, bottom: 60, left: 100 };
     const width =
       parseInt(d3.select(`#${randomIdChart}`).style('width'), 10) -
       margin.left -
@@ -155,24 +163,22 @@ const ResultLineChart: VFC<Props> = (props) => {
     const myTootip = focus
       .append('rect')
       .attr('class', 'result-tooltip')
-      .attr('x', 10)
-      .attr('y', -22)
+      .attr('x', -120)
+      .attr('y', -62)
       .attr('rx', 4)
       .attr('ry', 4);
 
     focus
       .append('text')
       .attr('class', 'result-tooltip-x')
-      .attr('x', 18)
-      .attr('y', -2);
-
-    focus.append('text').attr('x', 18).attr('y', 18).text(`${yaxisTitle}`);
+      .attr('x', -112)
+      .attr('y', -42);
 
     focus
       .append('text')
       .attr('class', 'result-tooltip-y')
-      .attr('x', 18)
-      .attr('y', 18);
+      .attr('x', -112)
+      .attr('y', -22);
 
     // focus.append('text').attr('x', 9).attr('y', '.35em');
     // const focusText = svg
@@ -224,7 +230,6 @@ const ResultLineChart: VFC<Props> = (props) => {
         myTootip.attr('width', tooltipWidth).attr('height', 50);
         focus.select('.result-tooltip-x').text(XtooltipText);
         focus.select('.result-tooltip-y').text(YtooltipText);
-
       }
     }
   });
