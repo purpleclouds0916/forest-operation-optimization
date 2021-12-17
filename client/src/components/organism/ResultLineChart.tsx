@@ -163,7 +163,7 @@ const ResultLineChart: VFC<Props> = (props) => {
     const myTootip = focus
       .append('rect')
       .attr('class', 'result-tooltip')
-      .attr('x', -120)
+      .attr('x', -60)
       .attr('y', -62)
       .attr('rx', 4)
       .attr('ry', 4);
@@ -171,13 +171,13 @@ const ResultLineChart: VFC<Props> = (props) => {
     focus
       .append('text')
       .attr('class', 'result-tooltip-x')
-      .attr('x', -112)
+      .attr('x', -52)
       .attr('y', -42);
 
     focus
       .append('text')
       .attr('class', 'result-tooltip-y')
-      .attr('x', -112)
+      .attr('x', -52)
       .attr('y', -22);
 
     // focus.append('text').attr('x', 9).attr('y', '.35em');
