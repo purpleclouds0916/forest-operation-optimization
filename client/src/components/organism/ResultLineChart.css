@@ -37,6 +37,10 @@ body {
   stroke: #000;
 }
 
+.chart-items .chart-item:first-child {
+  padding-top: 32px;
+}
+
 .chart-items .chart-item .chart-title {
   text-align: center;
   font-size: 24px;

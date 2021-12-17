@@ -1,10 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { VFC } from 'react';
 import { useSelector } from 'react-redux';
-
+import { BsFillArrowDownCircleFill } from 'react-icons/bs';
+import { IconContext } from 'react-icons';
 import { RootState } from '../../redux/store';
 
 import ResultLineChart from '../organism/ResultLineChart';
+import arrow from '../../img/arrow.jpeg';
+
+import './Result.css';
 
 const Result: VFC = () => {
   const calculationResult = useSelector((state: RootState) => state);
@@ -17,64 +25,170 @@ const Result: VFC = () => {
   const cutAllMony =
     calculationResult.SH_S.Stand_simulation.Value_of_standing_trees_no_discount;
 
-  console.log('treeHeight', treeHeight);
-  console.log('standDensity', standDensity);
-  console.log('ForestStandTimberArea', ForestStandTimberArea);
-  console.log('DBH', DBH);
-  console.log('cutAllMony', cutAllMony);
-
   return (
-    <div>
-      <div className="chart-wrapper">
-        <div className="chart-items">
-          <ResultLineChart
-            title="樹高の推移"
-            arrayX={ageforest}
-            arrayY={treeHeight}
-            DigitsOfYaxis={10}
-            yaxisTitle="樹高"
-            yaxisUnit="m"
-            tooltipWidth={98}
-          />
-          <ResultLineChart
-            title="立木密度"
-            arrayX={ageforest}
-            arrayY={standDensity}
-            DigitsOfYaxis={1000}
-            yaxisTitle="立木密度"
-            yaxisUnit="本/ha"
-            tooltipWidth={150}
-          />
-          <ResultLineChart
-            title="林分材積"
-            arrayX={ageforest}
-            arrayY={ForestStandTimberArea}
-            DigitsOfYaxis={100}
-            yaxisTitle="材積"
-            yaxisUnit="㎥"
-            tooltipWidth={100}
-          />
-          <ResultLineChart
-            title="平均胸高直径"
-            arrayX={ageforest}
-            arrayY={DBH}
-            DigitsOfYaxis={10}
-            yaxisTitle="胸高直径"
-            yaxisUnit="m"
-            tooltipWidth={120}
-          />
-          <ResultLineChart
-            title="全部伐採するといくらになるか"
-            arrayX={ageforest}
-            arrayY={cutAllMony}
-            DigitsOfYaxis={1000000}
-            yaxisTitle="金額"
-            yaxisUnit="円"
-            tooltipWidth={130}
-          />
+    <>
+      <div className="card result-wrapper">
+        <div className="form-title">提案された施業方法</div>
+        <div className="result-list-cards">
+          <div className="card result-items">
+            <ul className="result-item">
+              <li>初期植栽密度</li>
+              <li>{calculationResult.SH_S.Optimal_solution.N[0]}本/ha</li>
+            </ul>
+            <IconContext.Provider
+              value={{ color: 'steelblue', className: 'arrow-down' }}
+            >
+              <>
+                <BsFillArrowDownCircleFill />
+              </>
+            </IconContext.Provider>
+          </div>
+          {calculationResult.SH_S.Optimal_solution.T.map((item, i) => (
+            <div className="card result-items " key={i}>
+              <ul className="result-item">
+                {calculationResult.SH_S.Optimal_solution.T.length - 1 !== i ? (
+                  <li>{i + 1}回目の間伐のタイミング</li>
+                ) : (
+                  <li>皆伐のタイミング</li>
+                )}
+
+                <li>{calculationResult.SH_S.Optimal_solution.T[i]}年</li>
+              </ul>
+              {calculationResult.SH_S.Optimal_solution.T.length - 1 !== i && (
+                <>
+                  <ul className="result-item">
+                    <li>間伐後の植林密度</li>
+                    <li>
+                      {calculationResult.SH_S.Optimal_solution.N[i + 1]}本/ha
+                    </li>
+                  </ul>
+                </>
+              )}
+              <ul className="result-item">
+                <li>収穫材積</li>
+                <li>
+                  {calculationResult.SH_S.Optimal_solution.Y[i]}m
+                  <span className="Exponentiation">3</span>
+                </li>
+              </ul>
+              <ul className="result-item">
+                <li>収益</li>
+                <li>
+                  {
+                    calculationResult.SH_S.Optimal_solution
+                      .Harvesting_profit_no_discount[i]
+                  }
+                  円
+                </li>
+              </ul>
+              {calculationResult.SH_S.Optimal_solution.T.length - 1 !== i && (
+                <IconContext.Provider
+                  value={{ color: 'steelblue', className: 'arrow-down' }}
+                >
+                  <>
+                    <BsFillArrowDownCircleFill />
+                  </>
+                </IconContext.Provider>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="result-sev-wrapper">
+          <ul className="result-sev">
+            <li>この施業の土地希望価(SEV)：</li>
+            <li>{calculationResult.SH_S.Optimal_solution.SEV}円</li>
+          </ul>
         </div>
       </div>
-    </div>
+
+      {/* <div className="result-list">
+          <p>土地希望価(SEV)</p>
+          <p>{calculationResult.SH_S.Optimal_solution.SEV}</p>
+          <p>植栽密度</p>
+          <ul>
+            {' '}
+            {calculationResult.SH_S.Optimal_solution.N.map((item, i) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+
+          <p>伐採のタイミング</p>
+          <p>
+            {' '}
+            {calculationResult.SH_S.Optimal_solution.T.map((item, i) => (
+              <li>{item}</li>
+            ))}
+          </p>
+          <p>伐採のタイミングと収穫材積</p>
+          <p>
+            {' '}
+            {calculationResult.SH_S.Optimal_solution.Y.map((item, i) => (
+              <li>{item}</li>
+            ))}
+          </p>
+          <p>伐採のタイミングと収益</p>
+          <p>
+            {' '}
+            {calculationResult.SH_S.Optimal_solution.Harvesting_profit_no_discount.map(
+              (item, i) => (
+                <li>{item}</li>
+              ),
+            )}
+          </p>
+        </div> */}
+
+      <div className="card result-items result-list-card">
+        <div className="chart-wrapper">
+          <div className="chart-items">
+            <ResultLineChart
+              title="樹高の推移"
+              arrayX={ageforest}
+              arrayY={treeHeight}
+              DigitsOfYaxis={10}
+              yaxisTitle="樹高"
+              yaxisUnit="m"
+              tooltipWidth={98}
+            />
+            <ResultLineChart
+              title="立木密度"
+              arrayX={ageforest}
+              arrayY={standDensity}
+              DigitsOfYaxis={1000}
+              yaxisTitle="立木密度"
+              yaxisUnit="本/ha"
+              tooltipWidth={150}
+            />
+            <ResultLineChart
+              title="林分材積"
+              arrayX={ageforest}
+              arrayY={ForestStandTimberArea}
+              DigitsOfYaxis={100}
+              yaxisTitle="材積"
+              yaxisUnit="㎥"
+              tooltipWidth={100}
+            />
+            <ResultLineChart
+              title="平均胸高直径"
+              arrayX={ageforest}
+              arrayY={DBH}
+              DigitsOfYaxis={10}
+              yaxisTitle="胸高直径"
+              yaxisUnit="m"
+              tooltipWidth={120}
+            />
+            <ResultLineChart
+              title="全部伐採するといくらになるか"
+              arrayX={ageforest}
+              arrayY={cutAllMony}
+              DigitsOfYaxis={1000000}
+              yaxisTitle="金額"
+              yaxisUnit="円"
+              tooltipWidth={130}
+            />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

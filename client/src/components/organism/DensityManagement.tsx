@@ -104,7 +104,7 @@ const DensityManagement: VFC<Props> = (props) => {
 
   return (
     <div>
-      <div className="all-form-item">
+      <div className="card">
         <div className="form-title">林分密度管理図</div>
         <div className="sdmd-items">
           <div className="input-form-items">

@@ -84,7 +84,7 @@ ul {
   font-weight: 700;
 }
 
-.all-form-item {
+.card {
   width: 1200px;
   max-width: 100%;
   height: inherit;
@@ -96,7 +96,7 @@ ul {
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.all-form-item .form-title {
+.card .form-title {
   display: block;
   max-width: 100%;
   padding: 32px 48px;
@@ -105,14 +105,14 @@ ul {
   background: #fafafa;
 }
 
-.all-form-item .input-form-items .control-label {
+.card .input-form-items .control-label {
   display: inline-block;
   margin-bottom: 6px;
   font-size: 24px;
   color: #16191f;
 }
 
-.all-form-item .input-form-items .control-description {
+.card .input-form-items .control-description {
   margin-bottom: 6px;
   font-size: 18px;
   color: #687078;

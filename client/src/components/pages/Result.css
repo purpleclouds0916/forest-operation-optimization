@@ -1,38 +1,55 @@
-.chart-wrapper {
-  max-width: 1200px;
-  margin: 48px auto 0;
+.result-wrapper {
+  margin-top: 64px;
 }
 
-.chart-wrapper .chart-items {
+.result-wrapper .result-sev-wrapper {
+  margin-bottom: 32px;
+  padding-bottom: 48px;
+}
+
+.result-wrapper .result-sev-wrapper .result-sev {
+  width: 900px;
+  font-size: 18px;
   display: flex;
-  flex-wrap: wrap;
+  border-bottom: 1px solid;
+  padding: 0;
+  margin: 0px auto;
 }
 
-.chart-wrapper .chart-items .chart-item {
+.result-wrapper .result-list-cards {
   margin: 0 auto;
-  width: 50%;
+  width: 900px;
+  font-size: 18px;
 }
 
-.chart-wrapper .chart-items .chart-item .chart-title {
-  margin: 0 auto;
-  font-size: 24px;
-  text-align: center;
-  margin-bottom: -48px;
+.result-wrapper .result-items {
+  margin: 48px auto 0;
+  padding: 24px;
+  list-style: square;
+  position: relative;
 }
 
-.chart-wrapper .chart-items .chart-item .axis-y {
+.result-wrapper .result-items .arrow-down {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  color: #455a64;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 21px;
+  bottom: -80px;
+  right: 60px;
+  font-size: 120px;
+  z-index: 10;
 }
 
-.VictoryContainer {
-  overflow: visible;
+.result-wrapper .result-items:last-child {
+  margin: 48px auto;
 }
 
-.VictoryContainer svg {
-  overflow: visible;
+.result-wrapper .result-items .result-item {
+  line-height: 1.7;
+}
+
+.result-wrapper .result-items .result-item li:last-child {
+  border-bottom: 1px solid;
+}
+
+.Exponentiation {
+  vertical-align: super;
+  font-size: 14px;
 }

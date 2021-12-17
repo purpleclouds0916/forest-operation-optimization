@@ -122,7 +122,7 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
       {errors.score && errors.score.type === 'validate' && (
         <div className="error">Your score must be and even number</div>
       )}
-      <div className="all-form-item">
+      <div className="card">
         <div className="form-title">間伐材の費用計算</div>
         <div className="">
           <ul className="thinning-form-items">

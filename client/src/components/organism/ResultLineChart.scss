@@ -44,6 +44,11 @@ body {
 
 .chart-items {
      .chart-item {
+
+        &:first-child {
+            // margin-top: 60px
+            padding-top: 32px;
+        }
          .chart-title {
              text-align: center;
              font-size: 24px;

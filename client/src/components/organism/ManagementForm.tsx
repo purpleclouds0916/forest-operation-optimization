@@ -118,7 +118,7 @@ const Management: VFC<Props> = (props) => {
 
   return (
     <div>
-      <div className="all-form-item">
+      <div className="card">
         <div className="form-title">経営方法の詳細</div>
         <div className="">
           <ul className="management-items">
