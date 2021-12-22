@@ -1,8 +1,20 @@
+@import '../../../src/Setting';
+
 #d3demo {
-  width: inherit;
+  width: calc(100% - 20px);
   height: 70vh;
   // overflow: visible;
-  margin-left: 48px;
+  margin-left: 0px;
+
+  // @include mq('tab') {
+  //   width: 700px;
+  //     }
+
+  //     @include mq('sp') {
+  //       width: 310px;
+  //       font-size: 14px;
+  //         }   
+  // width: auto;
 
 }
 
@@ -46,6 +58,7 @@ svg + g {
 
 .lineChart {
   // padding-bottom: 24px;
+  width: auto;
 
   svg {
     display: block;

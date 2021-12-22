@@ -1,7 +1,7 @@
 #d3demo {
-  width: inherit;
+  width: calc(100% - 20px);
   height: 70vh;
-  margin-left: 48px;
+  margin-left: 0px;
 }
 
 text {
@@ -30,6 +30,10 @@ text {
 .axis--y {
   margin-right: 54px;
   position: absolute;
+}
+
+.lineChart {
+  width: auto;
 }
 
 .lineChart svg {

@@ -1,3 +1,5 @@
+@import '../../../src/Setting';
+
 body {
     font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -40,8 +42,6 @@ body {
     // height: auto;
 }
 
-
-
 .chart-items {
      .chart-item {
 
@@ -55,30 +55,13 @@ body {
              font-weight: 700;
          }
      }
-    svg {
-        display: block;
-        width: 1000px;
-        height: 600px;
-        margin: 0 auto;
-        text-align: center;
-    }
-}
 
+     .result-chart {
+         width: calc(100% - 20px);
+         height: 75vh;
 
-
-
-#test {
-    font-size: 32px;
-    padding: 24px;
-    background-color: red;
-    fill: red;
-}
-
-#Test
-{
-    position: absolute;
-    visibility: hidden;
-    height: auto;
-    width: auto;
-    white-space: nowrap; /* Thanks to Herb Caudill comment */
+         @include mq ('tab') {
+             height: 100vh;
+         }
+     }
 }

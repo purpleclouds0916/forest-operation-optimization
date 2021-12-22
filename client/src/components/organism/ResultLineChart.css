@@ -47,26 +47,13 @@ body {
   font-weight: 700;
 }
 
-.chart-items svg {
-  display: block;
-  width: 1000px;
-  height: 600px;
-  margin: 0 auto;
-  text-align: center;
+.chart-items .result-chart {
+  width: calc(100% - 20px);
+  height: 75vh;
 }
 
-#test {
-  font-size: 32px;
-  padding: 24px;
-  background-color: red;
-  fill: red;
-}
-
-#Test {
-  position: absolute;
-  visibility: hidden;
-  height: auto;
-  width: auto;
-  white-space: nowrap;
-  /* Thanks to Herb Caudill comment */
+@media (max-width: 1247px) {
+  .chart-items .result-chart {
+    height: 100vh;
+  }
 }

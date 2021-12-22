@@ -78,8 +78,21 @@ ul {
   margin-bottom: 64px;
 }
 
-.formDescription .form-title {
-  width: 1200px;
+@media (max-width: 1247px) {
+  .formDescription {
+    width: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .formDescription {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+.form-title {
+  width: auto;
   margin: 0 auto;
   font-weight: 700;
 }
@@ -94,6 +107,19 @@ ul {
   background: #fff;
   border-radius: 8px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 1247px) {
+  .card {
+    width: 700px;
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    width: 360px;
+    font-size: 14px;
+  }
 }
 
 .card .form-title {
@@ -126,9 +152,20 @@ ul {
   padding: 24px;
 }
 
+.sdmd-katexs-items {
+  margin-left: 32px;
+}
+
+@media (max-width: 767px) {
+  .sdmd-katexs-items {
+    font-size: 12px;
+    width: auto;
+    margin-left: 12px;
+  }
+}
+
 .sdmd-katexs-items .sdmd-katex-formula {
-  padding-left: 48px;
-  margin-bottom: 24px;
+  margin: 0 auto 24px;
 }
 
 .sdmd-katexs-items .sdmd-katex-description {
@@ -163,12 +200,28 @@ ul {
   margin-right: 24px;
 }
 
+@media (max-width: 767px) {
+  .management-items .input-form-items:nth-child(1), .management-items .input-form-items:nth-child(4), .management-items .input-form-items:nth-child(6), .management-items .input-form-items:nth-child(9), .management-items .input-form-items:nth-child(11) {
+    margin-right: 0px;
+  }
+}
+
 .management-items .input-plants,
 .management-items .regenerationCost-inputs,
 .management-items .thinningPercent-inputs,
 .management-items .harvesting-ages-input,
 .management-items .max-num-of-harvest-item {
   width: calc(50% - 24px * 1 / 2);
+}
+
+@media (max-width: 767px) {
+  .management-items .input-plants,
+  .management-items .regenerationCost-inputs,
+  .management-items .thinningPercent-inputs,
+  .management-items .harvesting-ages-input,
+  .management-items .max-num-of-harvest-item {
+    width: 100%;
+  }
 }
 
 .management-items .minimum-input,
@@ -191,36 +244,89 @@ ul {
   margin-right: 24px;
 }
 
-.thinning-form-items .input-form-items:last-child ul {
+@media (max-width: 767px) {
+  .thinning-form-items .input-form-items:nth-child(2), .thinning-form-items .input-form-items:nth-child(4) {
+    margin-right: 0;
+  }
+}
+
+.thinning-form-items .input-form-items .table-errors {
+  margin-bottom: 12px;
+  margin-left: 12px;
+  text-decoration: initial;
+  color: #43acff;
+  list-style-type: disc;
+}
+
+.thinning-form-items .input-form-items .table-errors li {
+  color: #d32f2f;
+  font-weight: 700;
+}
+
+.thinning-form-items .input-form-items:last-child {
+  flex-grow: 2;
+}
+
+.thinning-form-items .input-form-items:last-child .table {
   display: flex;
   flex-wrap: wrap;
-  color: red;
   border-radius: 0;
 }
 
-.thinning-form-items .input-form-items:last-child ul li {
+@media (max-width: 1247px) {
+  .thinning-form-items .input-form-items:last-child .table {
+    flex-direction: column;
+    height: 673px;
+  }
+}
+
+.thinning-form-items .input-form-items:last-child .table li {
   width: calc((100% - 130px) / 11);
-  color: red;
   border-radius: 0;
 }
 
-.thinning-form-items .input-form-items:last-child ul li:nth-child(1), .thinning-form-items .input-form-items:last-child ul li:nth-child(13) {
+@media (max-width: 1247px) {
+  .thinning-form-items .input-form-items:last-child .table li {
+    width: calc(100% / 2);
+    height: 56px;
+  }
+}
+
+.thinning-form-items .input-form-items:last-child .table li:nth-child(1), .thinning-form-items .input-form-items:last-child .table li:nth-child(13) {
   width: 130px;
+  font-weight: 700;
 }
 
-.thinning-form-items .input-form-items:last-child ul li .fieldset {
+@media (max-width: 1247px) {
+  .thinning-form-items .input-form-items:last-child .table li:nth-child(1), .thinning-form-items .input-form-items:last-child .table li:nth-child(13) {
+    width: calc(100% / 2);
+    height: 56px;
+  }
+}
+
+.thinning-form-items .input-form-items:last-child .table li .fieldset {
   border-radius: 0;
 }
 
-.thinning-form-items .input-form-items:last-child ul .TextField-without-border-radius fieldset {
+.thinning-form-items .input-form-items:last-child .table li .MuiInputAdornment-root {
+  display: none;
+}
+
+@media (max-width: 1247px) {
+  .thinning-form-items .input-form-items:last-child .table li .MuiInputAdornment-root {
+    display: flex;
+  }
+}
+
+.thinning-form-items .input-form-items:last-child .table .TextField-without-border-radius fieldset {
   border-radius: 0;
 }
 
-.thinning-form-items .input-form-items:last-child ul .thinning-diameter-input {
+.thinning-form-items .input-form-items:last-child .table .thinning-diameter-input {
   position: relative;
 }
 
-.thinning-form-items .input-form-items:last-child ul .diamter-error-message {
+.thinning-form-items .input-form-items:last-child .table .diamter-error-message {
   position: absolute;
   font-size: 12px;
   padding: 2px;
@@ -236,6 +342,15 @@ ul {
 .thinning-form-items .log-length-input,
 .thinning-form-items .logging-pitch-input {
   width: calc(50% - 24px * 1 / 2);
+}
+
+@media (max-width: 767px) {
+  .thinning-form-items .cost-item,
+  .thinning-form-items .stump-height-item,
+  .thinning-form-items .log-length-input,
+  .thinning-form-items .logging-pitch-input {
+    width: 100%;
+  }
 }
 
 .MuiOutlinedInput-notchedOutline {
@@ -290,4 +405,8 @@ ul {
   background-color: steelblue;
   color: #fff;
   margin-bottom: 48px;
+}
+
+.css-1wc848c-MuiFormHelperText-root.Mui-error {
+  font-weight: 700;
 }

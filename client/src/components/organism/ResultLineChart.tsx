@@ -38,34 +38,23 @@ interface Props {
   yaxisTitle: string;
   yaxisUnit: string;
   tooltipWidth: number;
+  givenInUnits?: number;
 }
 // tooltip用div要素追加
 const tooltip = d3.select('body').append('div').attr('class', 'tooltip');
 
-const ResultLineChart: VFC<Props> = (props) => {
-  const {
-    arrayX,
-    arrayY,
-    title,
-    DigitsOfYaxis,
-    yaxisTitle,
-    yaxisUnit,
-    tooltipWidth,
-  } = props;
+const ResultLineChart: VFC<Props> = ({
+  arrayX,
+  arrayY,
+  title,
+  DigitsOfYaxis,
+  yaxisTitle,
+  yaxisUnit,
+  tooltipWidth,
+  givenInUnits = 1,
+}) => {
+
   const d3Chart = useRef();
-
-  // ランダムな文字列(id)を作成する
-  // 生成する文字列の長さ
-  const l = 8;
-
-  // 生成する文字列に含める文字セット
-  const c = 'abcdefghijklmnopqrstuvwxyz';
-
-  const cl = c.length;
-  let randomIdChart = '';
-  for (let i = 0; i < l; i++) {
-    randomIdChart += c[Math.floor(Math.random() * cl)];
-  }
 
   useEffect(() => {
     d3
@@ -77,26 +66,35 @@ const ResultLineChart: VFC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const data: [number, number][] = [];
 
-    arrayX.map((element, index) => data.push([arrayX[index], arrayY[index]]));
+    arrayX.map((element: any, index: number) =>
+      data.push([arrayX[index], arrayY[index]]),
+    );
 
-    const margin = { top: 65, right: 100, bottom: 60, left: 100 };
+    const margin = { top: 65, right: 16, bottom: 60, left: 60 };
     const width =
-      parseInt(d3.select(`#${randomIdChart}`).style('width'), 10) -
+      parseInt(d3.select(`.result-chart`).style('width'), 10) -
       margin.left -
       margin.right;
     const height = 500 - margin.top - margin.bottom;
 
-    const maxX = Math.ceil(arrayX.reduce((a, b) => (a > b ? a : b)) / 10) * 10;
-    const minX = arrayX.reduce((a, b) => (a < b ? a : b));
+    const maxX =
+      Math.ceil(arrayX.reduce((a: number, b: number) => (a > b ? a : b)) / 10) *
+      10;
+    const minX = arrayX.reduce((a: number, b: number) => (a < b ? a : b));
 
     const maxY =
-      Math.ceil(arrayY.reduce((a, b) => (a > b ? a : b)) / DigitsOfYaxis) *
-      DigitsOfYaxis;
-    const minY = arrayY.reduce((a, b) => (a < b ? a : b));
+      Math.ceil(
+        arrayY.reduce((a: number, b: number) => (a > b ? a : b)) /
+          DigitsOfYaxis,
+      ) * DigitsOfYaxis;
+    const minY = arrayY.reduce((a: number, b: number) => (a < b ? a : b));
 
     const x = d3.scaleLinear().domain([minX, maxX]).range([0, width]);
 
-    const y = d3.scaleLinear().domain([minY, maxY]).range([height, 0]);
+    const y = d3
+      .scaleLinear()
+      .domain([minY / givenInUnits, maxY / givenInUnits])
+      .range([height, 0]);
 
     const xAxis = d3.axisBottom(x);
     const yAxis = d3.axisLeft(y);
@@ -106,7 +104,7 @@ const ResultLineChart: VFC<Props> = (props) => {
     const line = d3
       .line()
       .x((d) => x(d[0]))
-      .y((d) => y(d[1]));
+      .y((d) => y(d[1] / givenInUnits));
 
     const svg = d3
       // eslint-disable-next-line
@@ -130,8 +128,8 @@ const ResultLineChart: VFC<Props> = (props) => {
       .append('text')
       .attr('class', 'axis--y')
       .attr('y', -30)
-      .attr('x', -10)
-      .attr('text-anchor', 'middle')
+      .attr('x', -45)
+      .attr('text-anchor', 'left')
       .text(`${yaxisTitle}【${yaxisUnit}】`);
 
     svg
@@ -219,13 +217,13 @@ const ResultLineChart: VFC<Props> = (props) => {
       const d1 = data[i];
       console.log(d0);
       console.log(d1);
-
+      
       if (d1 !== undefined) {
         const d = x0 - d0[0] > d1[0] - x0 ? d1 : d0;
-        focus.attr('transform', `translate(${x(d[0])},${y(d[1])})`);
+        focus.attr('transform', `translate(${x(d[0])},${y(d[1] / givenInUnits)})`);
 
         const XtooltipText = `林齢:${d[0]}年`;
-        const YtooltipText = `${yaxisTitle}:${d[1]}${yaxisUnit}`;
+        const YtooltipText = `${yaxisTitle}:${Math.floor(d[1] / givenInUnits)}${yaxisUnit}`;
 
         myTootip.attr('width', tooltipWidth).attr('height', 50);
         focus.select('.result-tooltip-x').text(XtooltipText);
@@ -240,7 +238,7 @@ const ResultLineChart: VFC<Props> = (props) => {
         <div className="chart-title">{title}</div>
         {/* eslint-disable-next-line */}
         {/* @ts-ignore  */}
-        <svg ref={d3Chart} id={randomIdChart} />
+        <svg ref={d3Chart} className="result-chart" />
       </div>
     </>
   );

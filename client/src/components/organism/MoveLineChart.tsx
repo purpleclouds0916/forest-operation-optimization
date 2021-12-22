@@ -71,7 +71,7 @@ const LineChart: VFC<Props> = (props) => {
   const d3Chart = useRef();
 
   useEffect(() => {
-    const margin = { top: 20, right: 50, bottom: 70, left: 95 };
+    const margin = { top: 40, right: 0, bottom: 70, left: 70 };
     const width =
       parseInt(d3.select('#d3demo').style('width'), 10) -
       margin.left -
@@ -358,10 +358,9 @@ const LineChart: VFC<Props> = (props) => {
     svg
       .append('text')
       .attr('class', 'axis--y')
-      .attr('y', height / 2)
-      .attr('x', -75)
+      .attr('y', -20)
+      .attr('x', -15)
       .attr('text-anchor', 'middle')
-      .attr('writing-mode', 'tb')
       .text(`${yaxisTitle}【${yaxisUnit}】`);
   }, [
     clearErrors,

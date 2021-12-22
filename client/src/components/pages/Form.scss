@@ -1,3 +1,5 @@
+@import '../../../src/Setting';
+
 //
 //react-css
 //
@@ -68,6 +70,11 @@ ul {
   font-size: 18px;
   font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
 }
+// .hidden-pc {
+// 	@include mq('pc') {
+// 		display: none;
+// 	}
+// }
 
 .formDescription {
   display: block;
@@ -81,12 +88,21 @@ ul {
   // margin : 0 auto;
   margin-bottom: 64px;
 
+  @include mq('tab') {
+    width: auto;
+      }
+
+      @include mq('sp') {
+        width: 100%;
+        font-size: 14px;
+          }   
+  }
+
 
   .form-title {
-      width: 1200px;
+      width: auto;
   margin : 0 auto;
   font-weight: 700;
-  }
 }
 
 .card {
@@ -99,6 +115,15 @@ ul {
   background: #fff;
   border-radius: 8px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+
+  @include mq('tab') {
+    width: 700px;
+      }
+
+      @include mq('sp') {
+        width: 360px;
+        font-size: 14px;
+          }   
 
   .form-title {
     display: block;
@@ -140,9 +165,17 @@ ul {
 }
 
 .sdmd-katexs-items {
+  // width: 800px;
+  margin-left: 32px;
+
+  @include mq('sp') {
+    font-size: 12px;
+    width: auto;
+    margin-left: 12px;
+  }
   .sdmd-katex-formula {
-    padding-left: 48px;
-    margin-bottom: 24px;
+    margin:  0 auto 24px;
+    // margin-bottom: 24px;
   }
 
   .sdmd-katex-description {
@@ -179,6 +212,10 @@ ul {
     &:nth-child(9),
     &:nth-child(11) {
       margin-right: 24px;
+
+      @include mq ('sp') {
+        margin-right: 0px;
+      }
     }
   }
 
@@ -188,6 +225,10 @@ ul {
   .harvesting-ages-input,
   .max-num-of-harvest-item {
     width: calc(50% - 24px * 1 / 2);
+
+    @include mq ('sp') {
+      width: 100%;
+    }
   }
 
   .minimum-input,
@@ -208,27 +249,69 @@ ul {
     &:nth-child(2),
     &:nth-child(4) {
       margin-right: 24px;
+
+      @include mq ('sp') {
+        margin-right: 0;
+      }
+    }
+
+    .table-errors {
+      margin-bottom: 12px;
+      margin-left: 12px;
+      text-decoration: initial;
+      color: #43acff;
+      list-style-type: disc;
+  
+      li {
+        color: #d32f2f;
+        font-weight: 700;
+      }
     }
 
     &:last-child {
-      ul {
+      flex-grow: 2;
+      .table {
         display: flex;
         flex-wrap: wrap;
-        color: red;
         border-radius: 0;
+  
+
+        @include mq ('tab') {
+          flex-direction: column;
+          height: 673px;
+        }
 
         li {
           width: calc((100% - 130px) / 11);
-          color: red;
           border-radius: 0;
+
+          @include mq ('tab') {
+            width: calc(100% / 2 );
+          //  width: 260px;
+           height: 56px;
+          }
 
           &:nth-child(1),
           &:nth-child(13) {
             width: 130px;
+            font-weight: 700;
+
+            @include mq ('tab') {
+              width: calc(100% / 2 );
+              height: 56px;
+             }
           }
 
           .fieldset {
             border-radius: 0;
+          }
+
+          .MuiInputAdornment-root {
+            display: none;
+
+            @include mq ('tab') {
+              display: flex;
+            }
           }
         }
 
@@ -261,6 +344,10 @@ ul {
   .log-length-input,
   .logging-pitch-input {
     width: calc(50% - 24px * 1 / 2);
+
+    @include mq ('sp') {
+      width: 100%;
+    }
   }
 }
 
@@ -318,4 +405,8 @@ ul {
   background-color: steelblue;
   color:  #fff;
   margin-bottom: 48px;
+}
+
+.css-1wc848c-MuiFormHelperText-root.Mui-error {
+  font-weight: 700;
 }

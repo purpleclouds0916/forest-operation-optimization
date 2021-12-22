@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -93,7 +94,8 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
       },
       Price: {
         title: 'Price:',
-        description: '説明が入ります',
+        description:
+          '木材の胸高直径に対する金額を入力してください。下のグラフを動かすことでも入力をすることができます',
       },
     },
   };
@@ -116,6 +118,22 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
     const Yelement = Number(watchCostCalculation.Price[index].value);
     data[index] = [Xelement, Yelement];
   }
+
+  const tableAllErrors: string[] = [];
+  if (errors[loggingMethod]?.Diameter !== undefined) {
+    errors[loggingMethod]?.Diameter.map((item: any, index: number) => {
+      tableAllErrors.push(item.value.message);
+    });
+  }
+
+  // const chartPriceAllErrors: string[] = [];
+  if (errors[loggingMethod]?.Price !== undefined) {
+    errors[loggingMethod]?.Price.map((item: any, index: number) => {
+      tableAllErrors.push(item.value.message);
+    });
+  }
+
+  const tableErrors = [...new Set(tableAllErrors)]
 
   return (
     <div>
@@ -249,7 +267,6 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                 )}
               />
             </li>
-
             <li className="input-form-items logging-pitch-input">
               <p className="control-label">
                 {formTitleAndDescription.Logging.LoggingPitch.title}
@@ -296,8 +313,16 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
               <p className="field-description">
                 {formTitleAndDescription.Logging.Price.description}
               </p>
+              {tableErrors.length >= 1 && (
+                <ul className="table-errors">
+                  {tableErrors.map((chartError, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <li key={index}>{chartError}</li>
+                  ))}
+                </ul>
+              )}
 
-              <ul>
+              <ul className="table">
                 <li className="thinning-diameter-input-title TextField-without-border-radius">
                   <TextField
                     fullWidth
@@ -311,9 +336,6 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                     className="thinning-diameter-input TextField-without-border-radius"
                     key={LoggingDiameterField.id}
                   >
-                    <p className="diamter-error-message">
-                      {errors[loggingMethod]?.Diameter?.[index]?.value?.message}
-                    </p>
                     <Controller
                       control={control}
                       // @ts-ignore
@@ -326,6 +348,16 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                           error={Boolean(
                             errors[loggingMethod]?.Diameter?.[index],
                           )}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment
+                                position="end"
+                                className="display-none"
+                              >
+                                cm
+                              </InputAdornment>
+                            ),
+                          }}
                         />
                       )}
                     />
@@ -355,11 +387,21 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                           fullWidth
                           variant="outlined"
                           error={Boolean(errors[loggingMethod]?.Price?.[index])}
-                          helperText={
-                            errors[loggingMethod]?.Price &&
-                            errors[loggingMethod]?.Price?.[index]?.value
-                              ?.message
-                          }
+                          // helperText={
+                          //   errors[loggingMethod]?.Price &&
+                          //   errors[loggingMethod]?.Price?.[index]?.value
+                          //     ?.message
+                          // }
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment
+                                position="end"
+                                className="display-none"
+                              >
+                                円
+                              </InputAdornment>
+                            ),
+                          }}
                         />
                       )}
                     />
