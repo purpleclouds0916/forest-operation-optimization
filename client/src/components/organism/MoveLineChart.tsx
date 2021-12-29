@@ -130,7 +130,8 @@ const LineChart: VFC<Props> = (props) => {
       .scaleLinear()
       // eslint-disable-next-line
       // @ts-ignore
-      .domain([minY, maxY])
+      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+      .domain([minY, maxY + 10000])
       .range([height, 0]);
 
     const xAxis = d3.axisBottom(x);
@@ -250,8 +251,9 @@ const LineChart: VFC<Props> = (props) => {
             id !== data.length - 1 ? data[id + 1][0] : 40,
           ),
         );
-        
-        d[1] = Math.max(0, Math.min(y.invert(e.y), 100000)); // eslint-disable-line
+        // eslint-disable-next-line
+        // @ts-ignore
+        d[1] = Math.max(0, Math.min(y.invert(e.y), maxY + 20000 )); // eslint-disable-line
 
         // eslint-disable-next-line
         // @ts-ignore
