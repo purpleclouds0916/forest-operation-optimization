@@ -426,7 +426,7 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
             yaxisTitle="金額"
             yaxisUnit="円"
             xaxisMax={40}
-            yaxisMax={20000}
+            // yaxisMax={20000}
             xaxisMin={0}
             yaxisMin={0}
             data={data}
