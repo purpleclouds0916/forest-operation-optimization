@@ -52,99 +52,141 @@ const Form = () => {
     defaultValues: {
       SDMD: {
         H: [
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.H[0] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.H[1] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.H[2] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.H[3] },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.H[0],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.H[1],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.H[2],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.H[3],
+          },
         ],
         V: [
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.V[0] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.V[1] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.V[2] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.V[3] },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.V[0],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.V[1],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.V[2],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.V[3],
+          },
         ],
         NRf: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.NRf,
         DBH: [
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.DBH[0] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.DBH[1] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.DBH[2] },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.DBH[0],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.DBH[1],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.DBH[2],
+          },
         ],
         HF: [
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.HF[0] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.HF[1] },
-          { value: StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.HF[2] },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.HF[0],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.HF[1],
+          },
+          {
+            value:
+              StandDensityManagementData.minamikinnkisikokusugi.SH.SDMD.HF[2],
+          },
         ],
       },
-      Density: { Plant: [{ value: 1000 }, { value: 5000 }], Minimum: 500 },
-      RegenerationCost: [{ value: 1000000 }, { value: 100 }],
+      Density: { Plant: [{ value: 1000 }, { value: 3000 }], Minimum: 500 },
+      RegenerationCost: [{ value: 3290682 }, { value: 275 }],
       ThinningPercent: [{ value: 10 }, { value: 50 }],
-      AnnualInterestPercent: 0.9,
-      HarvestingAges: [{ value: 20 }, { value: 150 }, { value: 5 }],
-      MaxNumOfHarvest: 7,
+      AnnualInterestPercent: 0.8,
+      HarvestingAges: [{ value: 10 }, { value: 110 }, { value: 5 }],
+      MaxNumOfHarvest: 10,
       Thinning: {
-        YieldRate: 0.8,
-        Cost: 3000,
+        YieldRate: 0.58,
+        Cost: 10947,
         StumpHeight: 0.5,
         LogLength: 4,
         LoggingPitch: 4.1,
         Diameter: [
-          { value: 5 },
           { value: 6 },
+          { value: 8 },
+          { value: 9 },
+          { value: 12 },
+          { value: 14 },
           { value: 15 },
           { value: 16 },
           { value: 18 },
-          { value: 20 },
           { value: 22 },
           { value: 24 },
           { value: 28 },
-          { value: 30 },
-          { value: 40 },
         ],
         Price: [
-          { value: 0 },
-          { value: 3000 },
-          { value: 3000 },
-          { value: 8000 },
-          { value: 8000 },
-          { value: 9500 },
-          { value: 9500 },
-          { value: 11500 },
-          { value: 11500 },
-          { value: 12500 },
-          { value: 12500 },
+          { value: 8500 },
+          { value: 8500 },
+          { value: 9000 },
+          { value: 9000 },
+          { value: 9000 },
+          { value: 15500 },
+          { value: 15500 },
+          { value: 19500 },
+          { value: 19500 },
+          { value: 17500 },
+          { value: 17500 },
         ],
       },
       Clearcut: {
-        YieldRate: 0.9,
-        Cost: 6000,
+        YieldRate: 0.58,
+        Cost: 6869,
         StumpHeight: 0.5,
         LogLength: 4,
         LoggingPitch: 4.1,
         Diameter: [
-          { value: 5 },
           { value: 6 },
+          { value: 8 },
+          { value: 9 },
+          { value: 12 },
+          { value: 14 },
           { value: 15 },
           { value: 16 },
           { value: 18 },
-          { value: 20 },
           { value: 22 },
           { value: 24 },
           { value: 28 },
-          { value: 30 },
-          { value: 40 },
         ],
         Price: [
-          { value: 0 },
-          { value: 3000 },
-          { value: 3000 },
-          { value: 8000 },
-          { value: 8000 },
-          { value: 9500 },
-          { value: 9500 },
-          { value: 11500 },
-          { value: 11500 },
-          { value: 12500 },
-          { value: 12500 },
+          { value: 8500 },
+          { value: 8500 },
+          { value: 9000 },
+          { value: 9000 },
+          { value: 9000 },
+          { value: 15500 },
+          { value: 15500 },
+          { value: 19500 },
+          { value: 19500 },
+          { value: 17500 },
+          { value: 17500 },
         ],
       },
     },
@@ -177,7 +219,7 @@ const Form = () => {
       .catch((err) => console.log(err));
   });
 
-  const checkKeyDown = (e:any) => {
+  const checkKeyDown = (e: any) => {
     if (e.code === 'Enter') e.preventDefault();
   };
 
@@ -321,12 +363,9 @@ const Form = () => {
     void axios
       .post<CalculationResultType>('/api/calculation', Json)
       .then((res) => {
-        if (res.data.SH_S) {
-          const test = res.data.SH_S;
-          setResponseToPost(res.data.SH_S);
-          console.log(res.data);
-          dispatch(addCalculationResult(res.data));
-        }
+        // eslint-disable-next-line
+        // @ts-ignore
+        dispatch(addCalculationResult(JSON.parse(res.data)));
 
         navigate('/submit');
       })
@@ -356,11 +395,10 @@ const Form = () => {
 
   return (
     <div className="form-wrapper">
-      
       <div className="formDescription ">
         <p className="form-title">林業経営のデータを入力してください</p>
       </div>
-      
+
       {/* <p>{response}</p>
       <p>{JSON.stringify(responseToPost)}</p> */}
       <form
