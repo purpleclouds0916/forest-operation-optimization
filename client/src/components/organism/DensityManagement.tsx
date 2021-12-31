@@ -162,7 +162,7 @@ const DensityManagement: VFC<Props> = (props) => {
                     {...field}
                     label="選択する"
                     fullWidth
-                    defaultValue="tohoku"
+                    defaultValue="minamikinnkisikokusugi"
                     margin="normal"
                     variant="outlined"
                     id="select"
@@ -173,6 +173,9 @@ const DensityManagement: VFC<Props> = (props) => {
                   >
                     <MenuItem value="kyushuShikoku">九州四国地方</MenuItem>
                     <MenuItem value="tohoku">東北地方</MenuItem>
+                    <MenuItem value="minamikinnkisikokusugi">
+                      南近畿・四国地方 スギ林分密度管理図
+                    </MenuItem>
                   </TextField>
                 )}
               />

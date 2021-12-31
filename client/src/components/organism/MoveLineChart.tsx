@@ -253,7 +253,7 @@ const LineChart: VFC<Props> = (props) => {
         );
         // eslint-disable-next-line
         // @ts-ignore
-        d[1] = Math.max(0, Math.min(y.invert(e.y), maxY + 20000 )); // eslint-disable-line
+        d[1] = Math.max(0, Math.min(y.invert(e.y), maxY + 100000)); // eslint-disable-line
 
         // eslint-disable-next-line
         // @ts-ignore
