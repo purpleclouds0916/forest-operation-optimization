@@ -16,6 +16,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 app.post("/api/calculation", (req, res) => {
+  console.log("計算を始めます")
   // console.log(req.body);
   //参考Web: https://moewe-net.com/nodejs/node-java
   //必要なもの: node-java (npm install java)
@@ -42,7 +43,7 @@ app.post("/api/calculation", (req, res) => {
   // xhr.abort();
   // //読み込んだファイルの確認
   // console.log(input);
-  // console.log(JSON.stringify(req.body))
+  console.log(JSON.stringify(req.body))
 
   //Javaに送って実行
   let SH_S = javaObject.runSync(JSON.stringify(req.body));

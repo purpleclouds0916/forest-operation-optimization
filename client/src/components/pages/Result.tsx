@@ -97,70 +97,68 @@ const Result: VFC = () => {
           </div>
           <div className="result-sev-wrapper">
             <ul className="result-sev">
-              <li>この施業の土地希望価(SEV)<span className="hidden-sp">：</span></li>
+              <li>
+                この施業の土地希望価(SEV)<span className="hidden-sp">：</span>
+              </li>
               <li>{calculationResult.SH_S.Optimal_solution.SEV}円</li>
             </ul>
           </div>
-
-          
         </div>
         <div className="chart-wrapper">
-            <div className="card">
-              <div className="result-title">
-                施業方法の詳細
-              </div>
-              <div className="">
-                <div className="chart-items">
-                  <ResultLineChart
-                    title="樹高の推移"
-                    arrayX={ageforest}
-                    arrayY={treeHeight}
-                    DigitsOfYaxis={10}
-                    yaxisTitle="樹高"
-                    yaxisUnit="m"
-                    tooltipWidth={90}
-                  />
-                  <ResultLineChart
-                    title="立木密度の推移"
-                    arrayX={ageforest}
-                    arrayY={standDensity}
-                    DigitsOfYaxis={1000}
-                    yaxisTitle="立木密度"
-                    yaxisUnit="本/ha"
-                    tooltipWidth={150}
-                  />
-                  <ResultLineChart
-                    title="林分材積の推移"
-                    arrayX={ageforest}
-                    arrayY={ForestStandTimberArea}
-                    DigitsOfYaxis={100}
-                    yaxisTitle="材積"
-                    yaxisUnit="㎥"
-                    tooltipWidth={90}
-                  />
-                  <ResultLineChart
-                    title="平均胸高直径の推移"
-                    arrayX={ageforest}
-                    arrayY={DBH}
-                    DigitsOfYaxis={10}
-                    yaxisTitle="胸高直径"
-                    yaxisUnit="cm"
-                    tooltipWidth={110}
-                  />
-                  <ResultLineChart
-                    title="全部伐採するといくらになるか"
-                    arrayX={ageforest}
-                    arrayY={cutAllMony}
-                    DigitsOfYaxis={1000000}
-                    yaxisTitle="金額"
-                    yaxisUnit="万円"
-                    tooltipWidth={100}
-                    givenInUnits={10000}
-                  />
-                </div>
+          <div className="card">
+            <div className="result-title">施業方法の詳細</div>
+            <div className="">
+              <div className="chart-items">
+                <ResultLineChart
+                  title="樹高の推移"
+                  arrayX={ageforest}
+                  arrayY={treeHeight}
+                  DigitsOfYaxis={10}
+                  yaxisTitle="樹高"
+                  yaxisUnit="m"
+                  tooltipWidth={90}
+                />
+                <ResultLineChart
+                  title="立木密度の推移"
+                  arrayX={ageforest}
+                  arrayY={standDensity}
+                  DigitsOfYaxis={1000}
+                  yaxisTitle="立木密度"
+                  yaxisUnit="本/ha"
+                  tooltipWidth={150}
+                />
+                <ResultLineChart
+                  title="林分材積の推移"
+                  arrayX={ageforest}
+                  arrayY={ForestStandTimberArea}
+                  DigitsOfYaxis={100}
+                  yaxisTitle="材積"
+                  yaxisUnit="㎥"
+                  tooltipWidth={90}
+                />
+                <ResultLineChart
+                  title="平均胸高直径の推移"
+                  arrayX={ageforest}
+                  arrayY={DBH}
+                  DigitsOfYaxis={10}
+                  yaxisTitle="胸高直径"
+                  yaxisUnit="cm"
+                  tooltipWidth={110}
+                />
+                <ResultLineChart
+                  title="全部伐採するといくらになるか"
+                  arrayX={ageforest}
+                  arrayY={cutAllMony}
+                  DigitsOfYaxis={1000000}
+                  yaxisTitle="金額"
+                  yaxisUnit="万円"
+                  tooltipWidth={100}
+                  givenInUnits={10000}
+                />
               </div>
             </div>
           </div>
+        </div>
       </div>
     </>
   );
