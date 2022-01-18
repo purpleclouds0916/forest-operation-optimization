@@ -148,7 +148,7 @@ const Result: VFC = () => {
                     tooltipWidth={110}
                   />
                   <ResultLineChart
-                    title="全部伐採するといくらになるか"
+                    title="林分の価値"
                     arrayX={ageforest}
                     arrayY={cutAllMony}
                     DigitsOfYaxis={1000000}
