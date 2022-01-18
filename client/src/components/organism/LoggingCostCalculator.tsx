@@ -237,7 +237,7 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
               />
             </li>
 
-            <li className="input-form-items log-length-input">
+            {/* <li className="input-form-items log-length-input">
               <p className="control-label">
                 {formTitleAndDescription.Logging.LogLength.title}
               </p>
@@ -266,8 +266,8 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                   />
                 )}
               />
-            </li>
-            <li className="input-form-items logging-pitch-input">
+            </li> */}
+            {/* <li className="input-form-items logging-pitch-input">
               <p className="control-label">
                 {formTitleAndDescription.Logging.LoggingPitch.title}
               </p>
@@ -302,9 +302,8 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                   />
                 )}
               />
-              {/* // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
-              {/* {errors[loggingMethod] && 'Last name is required'} */}
-            </li>
+        
+            </li> */}
 
             <li className="input-form-items">
               <p className="control-label">
