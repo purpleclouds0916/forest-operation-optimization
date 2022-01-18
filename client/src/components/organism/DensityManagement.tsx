@@ -176,9 +176,6 @@ const DensityManagement: VFC<Props> = (props) => {
                     <MenuItem value="minamikinnkisikokusugi">
                       南近畿・四国地方 スギ林分密度管理図
                     </MenuItem>
-                    <MenuItem value="minamikinnkisikokuhinoki">
-                      南近畿・四国地方 ひのき林分密度管理図
-                    </MenuItem>
                   </TextField>
                 )}
               />
