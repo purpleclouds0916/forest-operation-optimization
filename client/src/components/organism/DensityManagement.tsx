@@ -105,7 +105,7 @@ const DensityManagement: VFC<Props> = (props) => {
   return (
     <div>
       <div className="card">
-        <div className="form-title">林分密度管理図</div>
+        <div className="form-title">林分の成長のデータ</div>
         <div className="sdmd-items">
           <div className="input-form-items">
             <input {...register('SDMD.NRf')} className="display-none" />
@@ -141,7 +141,7 @@ const DensityManagement: VFC<Props> = (props) => {
             <div className="sdmd-form-item">
               <div className="control-label">林分密度管理図を選択する</div>
               <div className="control-description">
-                選択することで、最適な林分の成長を予測することができます
+                選択することで、最適な林分材積を計算することができます。
               </div>
               {/* <Select
             {...register('region')}
@@ -205,14 +205,14 @@ const DensityManagement: VFC<Props> = (props) => {
                   <br />
                   <TeX>{String.raw`G = V/HF`}</TeX>
                   <br />
-                  <TeX>{String.raw`\overline{d}g = 200\sqrt{G/(\pi\cdot{N})}`}</TeX>
+                  <TeX>{String.raw`\overline{dg} = 200\sqrt{G/(\pi\cdot{N})}`}</TeX>
                   <br />
                   <TeX>{String.raw`\overline{d} = {${watchSdmd.DBH[0].value}}{${
                     watchSdmd.DBH[1].value > 0
                       ? `+${watchSdmd.DBH[1].value}`
                       : `${watchSdmd.DBH[1].value}`
                   }}\overline{d}g{${
-                    typeof watchSdmd.DBH[2] === 'undefined'
+                    watchSdmd.DBH[2].value === 0
                       ? ``
                       : `${
                           watchSdmd.DBH[2].value > 0
@@ -260,7 +260,7 @@ const DensityManagement: VFC<Props> = (props) => {
                   </div>
 
                   <div className="explanation-item">
-                    <TeX>{String.raw`\overline{d}g{\text{:断面積平均直径}}`}</TeX>
+                    <TeX>{String.raw`\overline{dg}{\text{:断面積平均直径}}`}</TeX>
                   </div>
 
                   <div className="explanation-item">

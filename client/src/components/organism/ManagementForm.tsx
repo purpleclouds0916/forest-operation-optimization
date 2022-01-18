@@ -61,58 +61,58 @@ const Management: VFC<Props> = (props) => {
     Density: {
       Plant: [
         {
-          title: 'Plantの左側',
-          description: '説明が入ります',
+          title: '最小の植林密度',
+          description: 'この値よりも小さい植林密度にはなりません',
         },
         {
-          title: 'Plantの右側',
-          description: '説明が入ります',
+          title: '最大の植林密度',
+          description: 'この値よりも大きい植林密度にはなりません',
         },
       ],
-      Minimum: { title: 'Minimum', description: 'Minimumの説明が入ります' },
+      Minimum: { title: '間伐による最小の植林密度', description: 'この値を下回る植林密度になる間伐は実施しません' },
     },
 
     RegenerationCost: [
       {
-        title: 'RegenerationCost',
-        description: '説明が入ります',
+        title: '植林・育林費用',
+        description: '地拵え,下刈り、枝打ち、除伐、獣害対策の合計費用',
       },
       {
-        title: 'RegenerationCost',
-        description: '説明が入ります',
+        title: '苗木の価格',
+        description: '苗木一本あたりの費用',
       },
     ],
     ThinningPercent: [
       {
         title: '最小の間伐率',
-        description: '最小の間伐率の説明が入ります',
+        description: 'この値以下の間伐は実施されません',
       },
       {
         title: '最大の間伐率',
-        description: '最大の間伐率の説明が入ります。',
+        description: 'この値以上の間伐は実施されません',
       },
     ],
     AnnualInterestPercent: {
-      title: 'AnnualInterestPercent',
-      description: 'AnnualInterestPercentの説明が入ります',
+      title: '年利',
+      description: '林業経営におけるリスクのことです。一般的には0.8 ~ 0.9になります',
     },
     HarvestingAges: [
       {
         title: '間伐を開始する林齢',
-        description: '間伐を開始する林齢の説明が入ります',
+        description: 'この値以下の林齢では、間伐を実施しません',
       },
       {
-        title: '最大の間伐率',
-        description: '最大の間伐率の説明が入ります',
+        title: '最大伐期',
+        description: 'この値以下の林業施業を提案します',
       },
       {
-        title: '間伐間隔',
-        description: '間伐間隔の説明が入ります',
+        title: '間伐の間隔',
+        description: '間伐をしてから次の間伐までの最小の期間です',
       },
     ],
     MaxNumOfHarvest: {
-      title: '間伐回数',
-      description: '間伐と皆伐の最大合計回数です',
+      title: '間伐の最大回数',
+      description: 'これよりも多い間伐は実施されません',
     },
   };
 
@@ -208,7 +208,7 @@ const Management: VFC<Props> = (props) => {
                       fullWidth
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position="end">本/ha</InputAdornment>
+                          <InputAdornment position="end">円</InputAdornment>
                         ),
                       }}
                       variant="outlined"
@@ -244,7 +244,7 @@ const Management: VFC<Props> = (props) => {
                       fullWidth
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position="end">本/ha</InputAdornment>
+                          <InputAdornment position="end">%</InputAdornment>
                         ),
                       }}
                       variant="outlined"
@@ -276,7 +276,7 @@ const Management: VFC<Props> = (props) => {
                     fullWidth
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">本/ha</InputAdornment>
+                        <InputAdornment position="end">%</InputAdornment>
                       ),
                     }}
                     variant="outlined"
@@ -314,7 +314,7 @@ const Management: VFC<Props> = (props) => {
                       fullWidth
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position="end">本/ha</InputAdornment>
+                          <InputAdornment position="end">年</InputAdornment>
                         ),
                       }}
                       variant="outlined"
@@ -345,7 +345,7 @@ const Management: VFC<Props> = (props) => {
                     fullWidth
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">本/ha</InputAdornment>
+                        <InputAdornment position="end">年</InputAdornment>
                       ),
                     }}
                     variant="outlined"

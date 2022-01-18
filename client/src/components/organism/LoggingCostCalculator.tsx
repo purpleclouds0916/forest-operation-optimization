@@ -39,6 +39,7 @@ type Props = {
   setValue: UseFormSetValue<FormValues>;
   watch: UseFormWatch<FormValues>;
   loggingMethod: string;
+  jploggingMethod: string;
   errors: any;
   clearErrors: any;
 };
@@ -52,6 +53,7 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
     setValue,
     watch,
     loggingMethod,
+    jploggingMethod,
     errors,
     clearErrors,
   } = props;
@@ -73,16 +75,16 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
   const formTitleAndDescription = {
     Logging: {
       YieldRate: {
-        title: 'YieldRate',
-        description: '説明が入ります',
+        title: `${jploggingMethod}材のうち利用できる割合`,
+        description: `${jploggingMethod}した材のうち、市場に出せる割合です`,
       },
       Cost: {
-        title: 'Cost',
-        description: '説明が入ります',
+        title: `${jploggingMethod}のコスト`,
+        description: `素材生産費と運材費の合計です`,
       },
       StumpHeight: {
-        title: 'StumpHeight',
-        description: '説明が入ります',
+        title: `${jploggingMethod}で木を切る高さ`,
+        description: '林分で木を切る時の高さのことです',
       },
       LogLength: {
         title: 'LogLength',
@@ -93,9 +95,8 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
         description: '説明が入ります',
       },
       Price: {
-        title: 'Price:',
-        description:
-          '木材の胸高直径に対する金額を入力してください。下のグラフを動かすことでも入力をすることができます',
+        title: `${jploggingMethod}した木材の価格`,
+        description: '胸高直径に対する木材の価格を入力してください',
       },
     },
   };
@@ -133,7 +134,7 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
     });
   }
 
-  const tableErrors = [...new Set(tableAllErrors)]
+  const tableErrors = [...new Set(tableAllErrors)];
 
   return (
     <div>
@@ -161,7 +162,7 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                     fullWidth
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">本/ha</InputAdornment>
+                        <InputAdornment position="end">%</InputAdornment>
                       ),
                     }}
                     variant="outlined"
@@ -192,7 +193,7 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                     fullWidth
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">本/ha</InputAdornment>
+                        <InputAdornment position="end">円</InputAdornment>
                       ),
                     }}
                     variant="outlined"
@@ -223,7 +224,7 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                     fullWidth
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">本/ha</InputAdornment>
+                        <InputAdornment position="end">m</InputAdornment>
                       ),
                     }}
                     variant="outlined"

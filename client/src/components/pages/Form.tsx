@@ -275,7 +275,7 @@ const Form = () => {
           data.HarvestingAges[1].value,
           data.HarvestingAges[2].value,
         ],
-        MaxNumOfHarvest: data.MaxNumOfHarvest,
+        MaxNumOfHarvest: data.MaxNumOfHarvest + 1,
         NumSearch: [3, 10000],
         Thinning: {
           YieldRate: data.Thinning.YieldRate,
@@ -427,6 +427,7 @@ const Form = () => {
           setValue={setValue}
           watch={watch}
           loggingMethod="Thinning"
+          jploggingMethod='間伐'
           errors={errors}
           clearErrors={clearErrors}
         />
@@ -437,6 +438,7 @@ const Form = () => {
           setValue={setValue}
           watch={watch}
           loggingMethod="Clearcut"
+          jploggingMethod='皆伐'
           errors={errors}
           clearErrors={clearErrors}
         />
