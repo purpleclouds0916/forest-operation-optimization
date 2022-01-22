@@ -13,7 +13,33 @@ const schema = yup
       Minimum: yup
         .number()
         .required('必須項目です')
-        .typeError('半角数字で入力してください'),
+        .typeError('半角数字で入力してください')
+        .test(
+          'plant-left',
+          '値が大きいです。(ここの値は最小の植林密度から最小の間伐率を引いた時の値以下にしてください)',
+          (value, id) => {
+            if (
+              id.parent.Plant[0].value *
+                // @ts-ignore
+                (1 - id.from[1].value.ThinningPercent[0].value / 100) >=
+              // @ts-ignore
+              value
+            ) {
+              return true;
+            }
+
+            return false;
+          },
+        )
+        .test('isInteger', '整数で入力してください', (value, id) => {
+          const isInteger = /^[+-]?[0-9]+\.[0-9]+([eE][+-]?[0-9]+)?$/;
+          // @ts-ignore
+          if (isInteger.test(value)) {
+            return false;
+          }
+
+          return true;
+        }),
       Plant: yup.array().of(
         yup.object().shape({
           value: yup
@@ -170,6 +196,15 @@ const schema = yup
       .number()
       .moreThan(0, '0よりも大きい数字を入れてください')
       .required('必須項目です')
+      .test('isInteger', '整数で入力してください', (value, id) => {
+        const isInteger = /^[+-]?[0-9]+\.[0-9]+([eE][+-]?[0-9]+)?$/;
+        // @ts-ignore
+        if (isInteger.test(value)) {
+          return false;
+        }
+
+        return true;
+      })
       .typeError('半角数字で入力してください'),
     Thinning: yup.object({
       YieldRate: yup
@@ -238,6 +273,15 @@ const schema = yup
                 return true;
               },
             )
+            .test('isInteger', '整数で入力してください', (value, id) => {
+              const isInteger = /^[+-]?[0-9]+\.[0-9]+([eE][+-]?[0-9]+)?$/;
+              // @ts-ignore
+              if (isInteger.test(value)) {
+                return false;
+              }
+
+              return true;
+            })
             .typeError('半角数字で入力してください')
             .required('必須項目です'),
         }),
@@ -319,7 +363,16 @@ const schema = yup
 
                 return true;
               },
-            ),
+            )
+            .test('isInteger', '整数で入力してください', (value, id) => {
+              const isInteger = /^[+-]?[0-9]+\.[0-9]+([eE][+-]?[0-9]+)?$/;
+              // @ts-ignore
+              if (isInteger.test(value)) {
+                return false;
+              }
+
+              return true;
+            }),
         }),
       ),
       Price: yup.array().of(

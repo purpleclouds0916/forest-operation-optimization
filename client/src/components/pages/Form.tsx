@@ -46,6 +46,7 @@ const Form = () => {
     watch,
     formState: { errors },
     clearErrors,
+    setError,
   } = useForm<FormValues>({
     mode: 'onChange',
     resolver: yupResolver(schema),
@@ -419,6 +420,8 @@ const Form = () => {
           setValue={setValue}
           watch={watch}
           errors={errors}
+          clearErrors={clearErrors}
+          setError={setError}
         />
         <LoggingCostCalculator
           register={register}
@@ -427,7 +430,7 @@ const Form = () => {
           setValue={setValue}
           watch={watch}
           loggingMethod="Thinning"
-          jploggingMethod='間伐'
+          jploggingMethod="間伐"
           errors={errors}
           clearErrors={clearErrors}
         />
@@ -438,7 +441,7 @@ const Form = () => {
           setValue={setValue}
           watch={watch}
           loggingMethod="Clearcut"
-          jploggingMethod='皆伐'
+          jploggingMethod="皆伐"
           errors={errors}
           clearErrors={clearErrors}
         />

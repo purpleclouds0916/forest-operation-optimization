@@ -32,11 +32,22 @@ type Props = {
   setValue: UseFormSetValue<FormValues>;
   watch: UseFormWatch<FormValues>;
   errors: any;
+  clearErrors: any;
+  setError: any;
 };
 
 const Management: VFC<Props> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { register, handleSubmit, control, setValue, watch, errors } = props;
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    errors,
+    clearErrors,
+    setError,
+  } = props;
 
   const { fields: DensityPlantFields } = useFieldArray({
     control,
@@ -69,7 +80,10 @@ const Management: VFC<Props> = (props) => {
           description: 'この値よりも大きい植林密度にはなりません',
         },
       ],
-      Minimum: { title: '間伐による最小の植林密度', description: 'この値を下回る植林密度になる間伐は実施しません' },
+      Minimum: {
+        title: '主伐の直前の最小の植林密度',
+        description: 'この値を下回る植林密度になる間伐は実施しません',
+      },
     },
 
     RegenerationCost: [
@@ -94,7 +108,8 @@ const Management: VFC<Props> = (props) => {
     ],
     AnnualInterestPercent: {
       title: '年利',
-      description: '林業経営におけるリスクのことです。一般的には0.8 ~ 0.9になります',
+      description:
+        '林業経営におけるリスクのことです。一般的には0.8 ~ 0.9になります',
     },
     HarvestingAges: [
       {
@@ -115,6 +130,35 @@ const Management: VFC<Props> = (props) => {
       description: 'これよりも多い間伐は実施されません',
     },
   };
+
+  const watchDensity: any = watch('Density');
+  const watchThinningPercent: any = watch('ThinningPercent');
+  // console.log(
+  //   watchDensity.Plant[0].value * (1 - watchThinningPercent[0].value / 100),
+  // );
+  // console.log(watchDensity.Plant[0].value >= watchDensity.MinimumAtClearcut.value / 1 - watchThinningPercent[0].value)
+  const clearError = () => {
+    //   id.parent.Plant[0].value *
+    //   // @ts-ignore
+    //   (1 - id.from[1].value.ThinningPercent[0].value / 100) >=
+    // // @ts-ignore
+    // value
+    // console.log(e); ThinningPercent
+    if (
+      watchDensity.Plant[0].value * (1 - watchThinningPercent[0].value / 100) >=
+      watchDensity.Minimum
+    ) {
+      clearErrors('Density.Minimum');
+    } else {
+      console.log('test');
+      setError('Density.Minimum', 'test', 'チョコレートくだあい');
+    }
+  };
+  // if (errors.Density.Minimum !== undefined) {
+  //   errors[loggingMethod]?.Diameter.map((item: any, index: number) => {
+  //     tableAllErrors.push(item.value.message);
+  //   });
+  // }
 
   return (
     <div>
@@ -141,6 +185,27 @@ const Management: VFC<Props> = (props) => {
                     <TextField
                       {...field}
                       fullWidth
+                      onChange={(e) => {
+                        clearError();
+
+                        if (
+                          // eslint-disable-next-line no-restricted-globals
+                          isNaN(Number(e.target.value)) ||
+                          e.target.value === ''
+                        ) {
+                          field.onChange('');
+                        } else {
+                          // eslint-disable-next-line radix
+                          field.onChange(parseInt(e.target.value));
+                        }
+                      }}
+                      // onChange={() => {
+                      //   clearError();
+                      // }}
+                      // onTouchEnd={(e) => {
+                      //   clearError()
+                      //   // setValue(`${loggingMethod}.Price.${number}.value`, PriceValue);
+                      // }}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">本/ha</InputAdornment>
@@ -172,6 +237,9 @@ const Management: VFC<Props> = (props) => {
                   <TextField
                     {...field}
                     fullWidth
+                    // onChange={(e) => {
+                    //   console.log("てきすと");
+                    // }}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">本/ha</InputAdornment>
@@ -185,6 +253,10 @@ const Management: VFC<Props> = (props) => {
                   />
                 )}
               />
+              {/* <div className="errors">
+                <div errors={errors} name="Density.Minimum" />
+                
+              </div> */}
             </li>
 
             {RegenerationCostFields.map((RegenerationCostField, index) => (
